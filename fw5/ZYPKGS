@@ -1,1 +1,8 @@
+Package: MetaRepository
+Version: 9.0
+Description: Repository Bridge
+Depends: 
+Size: 10240
+URL: MetaRepository.zpkg
+SHA256: 
 
