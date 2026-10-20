@@ -14,6 +14,7 @@
 | ownCloud 7 | `https://<WAN>:34501/pkg/ownCloud/` | `https://192.168.1.50:5001/pkg/ownCloud/` | `admin` |
 | Syncthing | `https://<WAN>:34501/apps/sync/` | `http://192.168.1.50:5000/apps/sync/` | из `00-secrets.env` |
 | COPS (OPDS, книги) | `https://<WAN>:34501/apps/cops/feed.php` | `http://192.168.1.50:5000/apps/cops/feed.php` | из `00-secrets.env` |
+| Библиотека (веб-каталог) | `https://<WAN>:34501/apps/cops/` | `http://192.168.1.50:5000/apps/cops/` | из `00-secrets.env` |
 | FileBrowser | `https://<WAN>:34501/apps/fb/` | `http://192.168.1.50:5000/apps/fb/` | `admin` |
 | AriaNg (aria2) | `https://<WAN>:34501/apps/aria/` | `http://192.168.1.50:5000/apps/aria/` | RPC-секрет |
 | Transmission | `https://<WAN>:34501/transmission/web/` | `http://192.168.1.50:5000/transmission/web/` | `admin` |
@@ -29,6 +30,11 @@
 Syncthing (папка `apps`), WinSCP по SSH. Через минуту книга сама появится в каталоге
 COPS: обложка, автор, жанры и аннотация берутся из EPUB/FB2. Подробности —
 [docs/04-services.md](docs/04-services.md#автоимпорт-книг).
+
+Каталог открывается по адресу `.../apps/cops/` — это собственный лёгкий интерфейс
+(сетка обложек, поиск, авторы и жанры, тёмная тема), см.
+[docs/04-services.md](docs/04-services.md#современный-интерфейс-appscopsui).
+Телефонные читалки по-прежнему подключаются к OPDS `.../apps/cops/feed.php`.
 
 ---
 
@@ -106,7 +112,8 @@ PROJECT_STATE.md          — журнал состояния и история 
 - ownCloud 7 не обновляем: официальное приложение Android 2.14.2 работает через шимы,
   более новые версии приложения требуют сервер ≥ 10.
 - Свободной RAM мало (~100 МБ), поэтому тяжёлые альтернативы (Calibre-Web, Kavita, Komga)
-  не ставим — на этой железке оптимален COPS.
+  не ставим. COPS остаётся OPDS-сервером, а современный вид даёт собственный каталог
+  `/apps/cops/ui/` на чистом JS — без сборки, зависимостей и лишней памяти.
 
 ---
 

@@ -103,6 +103,12 @@
   иконка `images/favicon.ico` (генерируется `make_icon.py`, без Pillow),
   HTTP Basic по `COPS_USER`/`COPS_PASS`, скрыты полки series/publisher/rating/language,
   кэш обложек на диске (`calibre/.thumbs`), 12 недавних книг и 30 на страницу.
+- **Современный интерфейс библиотеки (20.10.2026):** `Apps/cops/ui/` — отдельный
+  лёгкий каталог на чистом JS (без сборки и лишней RAM), читает `metadata.db` через
+  свой `api.php` (PDO sqlite, Basic auth наследуется от COPS). Сетка обложек,
+  поиск, авторы/жанры, карточка книги, скачивание, читалка EPUB, тёмная тема.
+  `/apps/cops/` теперь отдаёт 302 на `/ui/`; старый вид — `index.php?page=1`,
+  настройки COPS — `index.php?page=19`.
 - **Автоимпорт книг:** `Apps/calibre/inbox` → `S91bookimport` (раз в 60 с) →
   `cops-tools/import_books.py` (EPUB/FB2 с метаданными, остальное по имени файла) →
   запись в `metadata.db` + файл в структуре Calibre. Лог `Apps/logs/bookimport.log`.

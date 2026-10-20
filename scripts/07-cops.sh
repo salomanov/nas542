@@ -94,6 +94,39 @@ else
     echo "  icons already present"
 fi
 
+# ---------------------------------------------------------------- modern UI
+log "COPS: modern interface"
+mkdir -p "$COPS_DIR/ui/assets"
+install -m 644 "$CONFIGS/cops/ui/index.php" "$COPS_DIR/ui/index.php"
+install -m 644 "$CONFIGS/cops/ui/api.php" "$COPS_DIR/ui/api.php"
+install -m 644 "$CONFIGS/cops/ui/assets/app.css" "$COPS_DIR/ui/assets/app.css"
+install -m 644 "$CONFIGS/cops/ui/assets/app.js" "$COPS_DIR/ui/assets/app.js"
+chown -R admin:root "$COPS_DIR/ui"
+
+# Plain /apps/cops/ opens the new interface; OPDS and deep links keep working.
+/opt/bin/python3 - "$COPS_DIR/index.php" <<'PY'
+import sys
+path = sys.argv[1]
+src = open(path, encoding='utf-8', errors='surrogateescape').read()
+if 'NAS542: modern catalogue' in src:
+    print('  index.php already patched')
+else:
+    needle = "    require_once dirname(__FILE__) . '/base.php';"
+    insert = (
+        needle + "\n\n"
+        "    // NAS542: modern catalogue is the default entry point.\n"
+        "    if (!isset($_GET['page']) && !isset($_GET['query']) && !isset($_GET['id']) && !isset($_GET['db'])) {\n"
+        "        header('Location: ui/');\n"
+        "        exit();\n"
+        "    }"
+    )
+    if needle in src:
+        open(path, 'w', encoding='utf-8', errors='surrogateescape').write(src.replace(needle, insert, 1))
+        print('  index.php patched')
+    else:
+        print('  pattern not found, skipped')
+PY
+
 # ---------------------------------------------------------------- importer
 log "COPS: book importer"
 install -m 755 "$SELF/tools/import_books.py" "$TOOLS_DIR/import_books.py"
@@ -122,5 +155,12 @@ else
     warn "COPS check: no auth -> $CODE, with auth -> $CODE_AUTH"
 fi
 
+UI=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 -u "$COPS_USER:$COPS_PASS" "http://127.0.0.1:5005/ui/")
+UI_NOAUTH=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "http://127.0.0.1:5005/ui/")
+API_BOOKS=$(curl -s --max-time 20 -u "$COPS_USER:$COPS_PASS" \
+    "http://127.0.0.1:5005/ui/api.php?action=list&limit=1" | head -c 60)
+echo "  UI:  /ui/ -> $UI (without password: $UI_NOAUTH)"
+echo "  API: $API_BOOKS"
+echo "  Old interface: /apps/cops/index.php?page=1, settings: ?page=19"
 echo "  Inbox:  $CALIBRE_DIR/inbox (drop epub/fb2 here)"
 echo "  Import: /opt/etc/init.d/S91bookimport status"

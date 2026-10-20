@@ -17,6 +17,12 @@ if (!isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['HTTP_AUTHORIZATION'])
     }
 }
 
+/*
+ * Старые cookie могли зафиксировать другой шаблон/стиль (например после
+ * экспериментов с «Default COPS template»). Всегда берём значения из конфига.
+ */
+unset($_COOKIE['template'], $_COOKIE['style']);
+
 /* --- библиотека --- */
 $config['calibre_directory'] = '__APPS__/calibre/';
 
