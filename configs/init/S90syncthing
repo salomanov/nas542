@@ -1,0 +1,48 @@
+#!/bin/sh
+NAME=syncthing
+DESC="Syncthing"
+DAEMON=/opt/bin/syncthing
+ARGS="serve --home=/i-data/45f1aca1/Apps/syncthing --gui-address=0.0.0.0:5004 --no-browser"
+PIDFILE=/opt/var/run/syncthing.pid
+LOGFILE=/i-data/45f1aca1/Apps/logs/syncthing.log
+RUNAS=admin
+
+start() {
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        echo "$DESC already running (pid $(cat "$PIDFILE"))"; return 0
+    fi
+    mkdir -p /opt/var/run /i-data/45f1aca1/Apps/logs
+    start-stop-daemon --start --background --make-pidfile --pidfile "$PIDFILE" \
+        --chuid "$RUNAS" --exec "$DAEMON" -- $ARGS >> "$LOGFILE" 2>&1
+    sleep 3
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        echo "$DESC started (pid $(cat "$PIDFILE"))"; return 0
+    fi
+    echo "$DESC failed to start"; return 1
+}
+
+stop() {
+    if [ -f "$PIDFILE" ]; then
+        start-stop-daemon --stop --pidfile "$PIDFILE" --retry 10 >/dev/null 2>&1
+        rm -f "$PIDFILE"
+        echo "$DESC stopped"
+    else
+        echo "$DESC not running"
+    fi
+}
+
+status() {
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        echo "$DESC running (pid $(cat "$PIDFILE"))"
+    else
+        echo "$DESC stopped"
+    fi
+}
+
+case "$1" in
+    start) start ;;
+    stop) stop ;;
+    restart) stop; sleep 1; start ;;
+    status) status ;;
+    *) echo "Usage: $0 {start|stop|restart|status}"; exit 1 ;;
+esac

@@ -1,0 +1,14 @@
+# secrets
+scripts/00-secrets.env
+
+# scratch / local only
+_fetch/
+debug/
+cookies.txt
+phone_screenshot.jpg
+
+# build noise
+*.log
+*.tgz
+*.zip
+__pycache__/

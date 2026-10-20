@@ -1,0 +1,15 @@
+# Shell scripts and configs must stay LF: they are executed by Linux on the NAS.
+* text=auto
+
+*.sh    text eol=lf
+*.conf  text eol=lf
+*.json  text eol=lf
+*.php   text eol=lf
+*.py    text eol=lf
+*.block text eol=lf
+*.crt   text eol=lf
+*.md    text eol=lf
+
+# Windows helpers
+*.ps1   text eol=crlf
+*.cmd   text eol=crlf

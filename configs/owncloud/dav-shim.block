@@ -1,0 +1,28 @@
+/* OC10-DAV-SHIM: accept /dav/files/<user>/... like ownCloud 8+ clients do */
+if (isset($_SERVER["PATH_INFO"]) && preg_match("#^/dav/files/([^/]*)(/.*)?$#", $_SERVER["PATH_INFO"], $__m)) {
+	$__user = $__m[1];
+	$__rest = (isset($__m[2]) && $__m[2] !== "") ? $__m[2] : "/";
+	$_SERVER["PATH_INFO"] = "/webdav" . $__rest;
+	if (isset($_SERVER["REQUEST_URI"])) {
+		$_SERVER["REQUEST_URI"] = preg_replace("#^(.*?/remote\.php)/dav/files/[^/]*#", "$1/webdav", $_SERVER["REQUEST_URI"], 1);
+	}
+	if ($__user !== "") {
+		$GLOBALS["OC_DAV_SHIM_USER"] = $__user;
+		ob_start(function ($__buf) {
+			if (empty($GLOBALS["OC_DAV_SHIM_USER"])) {
+				return $__buf;
+			}
+			$__h = implode("\n", headers_list());
+			if (stripos($__h, "xml") === false) {
+				return $__buf;
+			}
+			return str_replace("/remote.php/webdav/", "/remote.php/dav/files/" . $GLOBALS["OC_DAV_SHIM_USER"] . "/", $__buf);
+		}, 1048576);
+	}
+}
+/* OC10-DAV-SHIM: chunked upload v2 endpoint (/dav/uploads/...) */
+if (isset($_SERVER["PATH_INFO"]) && strpos($_SERVER["PATH_INFO"], "/dav/uploads/") === 0) {
+	require_once __DIR__ . "/dav-uploads-shim.php";
+	exit;
+}
+/* end OC10-DAV-SHIM */
