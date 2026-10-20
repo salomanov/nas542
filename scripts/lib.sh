@@ -33,6 +33,8 @@ load_secrets() {
     : "${ST_PASS:=}"
     : "${COPS_USER:=admin}"
     : "${COPS_PASS:=}"
+    # 1 = keep the "drop a file into inbox" importer; 0 = Calibre on a PC owns the library
+    : "${CALIBRE_IMPORTER:=0}"
 }
 
 require_secrets() {

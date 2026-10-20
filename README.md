@@ -26,10 +26,15 @@
 
 ### Как добавить книгу
 
-Положите файл в папку `Apps/calibre/inbox` любым удобным способом — FileBrowser,
-Syncthing (папка `apps`), WinSCP по SSH. Через минуту книга сама появится в каталоге
-COPS: обложка, автор, жанры и аннотация берутся из EPUB/FB2. Подробности —
-[docs/04-services.md](docs/04-services.md#автоимпорт-книг).
+Библиотеку ведёт **Calibre на компьютере**: добавьте/удалите книги и поправьте
+метаданные в привычном интерфейсе, затем нажмите ярлык «Опубликовать библиотеку в NAS»
+(скрипт `scripts/tools/publish-calibre.ps1`) — изменения уедут на NAS по SFTP, и каталог
+сразу их покажет. NAS при этом остаётся сервером: собственный каталог, OPDS и скачивание
+работают с его копии. Подробности —
+[docs/04-services.md](docs/04-services.md#библиотека-calibre-на-пк-nas--сервер).
+
+Старый режим «положить файл в `Apps/calibre/inbox`» остался, но по умолчанию выключен
+(`CALIBRE_IMPORTER=0`), чтобы не было двух писателей в `metadata.db`.
 
 Каталог открывается по адресу `.../apps/cops/` — это собственный лёгкий интерфейс
 (сетка обложек, поиск, авторы и жанры, тёмная тема), см.
@@ -68,11 +73,11 @@ scripts/
   04-filebrowser.sh       — FileBrowser + пользователь
   05-transmission.sh      — Transmission
   06-aria2-ariang.sh      — aria2 + AriaNg
-  07-cops.sh              — COPS (OPDS): тема, иконка, пароль, импортёр книг
+  07-cops.sh              — COPS (OPDS): тема, иконка, пароль, каталог
   08-httpd-proxy.sh       — mod_proxy в pkg_httpd
   09-owncloud-shims.sh    — шимы OC10 для ownCloud 7
   lib.sh                  — общие функции
-  tools/                  — deploy.ps1, nasrun.ps1, healthcheck.sh, backup.sh
+  tools/                  — deploy.ps1, nasrun.ps1, publish-calibre.ps1, healthcheck.sh, backup.sh
 configs/
   httpd/                  — apps_proxy.conf
   init/                   — init-скрипты сервисов

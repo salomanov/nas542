@@ -73,6 +73,17 @@ sh tls/install-leaf.sh          # создаёт leaf_new.crt с SAN
 
 - **Windows**: `tls\install-ca-admin.cmd` от имени администратора (машинное хранилище),
   иначе WebDAV-диск не подключится.
+- **macOS**:
+  - *Через Терминал (быстро)*:
+    ```bash
+    sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain root_ca.crt
+    ```
+  - *Через графический интерфейс*:
+    1. Открыть `root_ca.crt` двойным кликом (откроется «Связка ключей» / *Keychain Access*).
+    2. Перетащить сертификат в связку **«Система»** (*System*).
+    3. Дважды кликнуть на добавленный сертификат `Zyxel NAS Root CA`, развернуть пункт **«Доверие»** (*Trust*).
+    4. В пункте *«Параметры использования сертификата»* выбрать **«Всегда доверять»** (*Always Trust*).
+    5. Закрыть окно, подтвердив паролем администратора Mac.
 - **Android**: сертификат можно скачать из облака —
   `https://host:34501/pkg/ownCloud/remote.php/webdav/Zyxel-NAS-CA.crt`
   и установить как «сертификат ЦС».

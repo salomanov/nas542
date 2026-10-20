@@ -222,10 +222,19 @@ else:
 PY
 
 # ---------------------------------------------------------------- importer
-log "COPS: book importer"
-install -m 755 "$SELF/tools/import_books.py" "$TOOLS_DIR/import_books.py"
-install -m 755 "$CONFIGS/cops/bookimport-loop.sh" "$TOOLS_DIR/bookimport-loop.sh"
-install_init S91bookimport
+# metadata.db must have exactly one writer. With Calibre on a PC
+# (CALIBRE_IMPORTER=0, default) the PC publishes the library over SFTP and the
+# inbox importer stays off; otherwise both would write into the same database.
+if [ "$CALIBRE_IMPORTER" = "1" ]; then
+    log "COPS: book importer"
+    install -m 755 "$SELF/tools/import_books.py" "$TOOLS_DIR/import_books.py"
+    install -m 755 "$CONFIGS/cops/bookimport-loop.sh" "$TOOLS_DIR/bookimport-loop.sh"
+    install_init S91bookimport
+else
+    log "COPS: book importer disabled (CALIBRE_IMPORTER=0, Calibre on PC is the writer)"
+    if [ -x "$INITD/S91bookimport" ]; then "$INITD/S91bookimport" stop; fi
+    rm -f "$INITD/S91bookimport"
+fi
 
 if [ "$DEMO" = "1" ] && [ ! -f "$CALIBRE_DIR/metadata.db" ]; then
     log "COPS: demo library (3 Gutenberg books)"
@@ -235,7 +244,7 @@ fi
 log "COPS: starting"
 install_init S89cops
 "$INITD/S89cops" restart
-"$INITD/S91bookimport" restart
+if [ "$CALIBRE_IMPORTER" = "1" ]; then "$INITD/S91bookimport" restart; fi
 sleep 2
 
 CODE=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "http://127.0.0.1:5005/feed.php")
@@ -256,5 +265,9 @@ API_BOOKS=$(curl -s --max-time 20 -u "$COPS_USER:$COPS_PASS" \
 echo "  UI:  /ui/ -> $UI (without password: $UI_NOAUTH)"
 echo "  API: $API_BOOKS"
 echo "  Old interface: /apps/cops/index.php?page=1, settings: ?page=19"
-echo "  Inbox:  $CALIBRE_DIR/inbox (drop epub/fb2 here)"
-echo "  Import: /opt/etc/init.d/S91bookimport status"
+if [ "$CALIBRE_IMPORTER" = "1" ]; then
+    echo "  Inbox:  $CALIBRE_DIR/inbox (drop epub/fb2 here)"
+    echo "  Import: /opt/etc/init.d/S91bookimport status"
+else
+    echo "  Library: managed by Calibre on a PC, published with scripts/tools/publish-calibre.ps1"
+fi

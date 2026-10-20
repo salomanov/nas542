@@ -113,7 +113,8 @@ php-cli -S 0.0.0.0:5006 -t /i-data/45f1aca1/Apps/ariang /i-data/45f1aca1/Apps/ar
 | Веб-каталог | `/apps/cops/` (редирект на `/apps/cops/ui/`) |
 | OPDS | `/apps/cops/feed.php` |
 | Библиотека | `/i-data/45f1aca1/Apps/calibre/` (`metadata.db` + книги) |
-| Входящие книги | `/i-data/45f1aca1/Apps/calibre/inbox/` |
+| Редактирование | Calibre на ПК, публикация `scripts/tools/publish-calibre.ps1` |
+| Автоимпорт из inbox | выключен (`CALIBRE_IMPORTER=0`), см. ниже |
 | Конфиг | `config_local.php` (генерируется из `configs/cops/config_local.php`) |
 | Логин | `COPS_USER` / `COPS_PASS` из `scripts/00-secrets.env` |
 
@@ -208,11 +209,43 @@ php-cli -S 0.0.0.0:5006 -t /i-data/45f1aca1/Apps/ariang /i-data/45f1aca1/Apps/ar
 * Файлы UI лежат в репозитории: `configs/cops/ui/`. После правок достаточно
   скопировать их в `Apps/cops/ui/` и обновить страницу (PHP-кеша нет).
 
-### Автоимпорт книг
+### Библиотека: Calibre на ПК, NAS — сервер
 
-Кладёте файл в `calibre/inbox/` — через минуту он появляется в каталоге.
+Библиотеку ведёт **Calibre на компьютере**: добавить, удалить, поправить метаданные,
+сортировка — всё в привычном интерфейсе. NAS хранит копию и раздаёт её (каталог, OPDS,
+скачивание), но сам в `metadata.db` не пишет.
+
+```
+E:\Библиотека Calibre  ──publish-calibre.ps1 (SFTP :34522)──▶  Apps/calibre
+   (оригинал, Calibre GUI)                                      (копия, только чтение)
+```
+
+* **Публикация.** `scripts/tools/publish-calibre.ps1` (на ПК; нужны Python и WinSCP,
+  пароль берётся из `scripts/00-secrets.env`):
+  * снимает консистентный снимок `metadata.db` через sqlite backup API — можно запускать
+    даже при открытом Calibre;
+  * синхронизирует папку библиотеки на NAS: только изменения, удалённые книги удаляются
+    и на NAS (`-NoDelete` — если удалять не нужно);
+  * заливает снимок базы последним, чтобы она не ссылалась на ещё не загруженные файлы;
+  * сверяет число книг на NAS с локальным и пишет лог в `%LOCALAPPDATA%\nas542\publish.log`.
+* **Кнопка.** На рабочем столе ярлык «Опубликовать библиотеку в NAS». Путь к библиотеке
+  скрипт берёт из настроек Calibre (`global.py.json`), поэтому ярлык работает и после
+  переезда библиотеки; другой путь — `-LocalLibrary "D:\Books\Calibre Library"`.
+* **Один хозяин базы.** Автоимпорт из `inbox` по умолчанию выключен
+  (`CALIBRE_IMPORTER=0` в `00-secrets.env`): два писателя в `metadata.db` — это
+  гарантированные конфликты. Включать `CALIBRE_IMPORTER=1` есть смысл, только если
+  Calibre на ПК не используется.
+* **Версия схемы.** База создана Calibre 9 (schema v28). COPS и новый каталог её читают
+  нормально. Старую самодельную базу (`tools/mklib.py`) открывать в Calibre нельзя:
+  Calibre считает её нулевой версией и пересоздаёт — книги пропадают.
+
+### Автоимпорт книг (опционально)
+
+Включается только при `CALIBRE_IMPORTER=1` в `scripts/00-secrets.env` (и повторном
+`07-cops.sh`). Кладёте файл в `calibre/inbox/` — через минуту он появляется в каталоге.
 Работает демон `S91bookimport` (`cops-tools/bookimport-loop.sh`), он раз в 60 секунд
-запускает `cops-tools/import_books.py`.
+запускает `cops-tools/import_books.py`. При работе Calibre на ПК этот режим должен быть
+выключен.
 
 * **EPUB** — заголовок, авторы, язык, издательство, дата, жанры (subject), аннотация,
   ISBN, серия и обложка (`cover-image` / `meta name="cover"`).
