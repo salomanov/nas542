@@ -53,6 +53,18 @@ render() {
         -e "s|__ARIA2_SECRET__|$(_esc "$ARIA2_SECRET")|g" \
         -e "s|__ST_PASS__|$(_esc "$ST_PASS")|g" \
         "$_src" > "$_dst"
+
+    # Strip a UTF-8 BOM if the template had one: in PHP configs it is printed
+    # before headers ("Cannot modify header information").
+    if [ -x /opt/bin/python3 ]; then
+        /opt/bin/python3 - "$_dst" <<'PY'
+import sys
+p = sys.argv[1]
+b = open(p, 'rb').read()
+if b.startswith(b'\xef\xbb\xbf'):
+    open(p, 'wb').write(b[3:])
+PY
+    fi
 }
 
 install_init() {

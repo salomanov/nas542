@@ -66,6 +66,20 @@ start-stop-daemon --start --background --make-pidfile --pidfile /opt/var/run/x.p
 вместо 5004–5008. Лечится правильным внутренним портом или (как сейчас)
 использованием общего прокси на 5001.
 
+## BOM в конфигах
+
+Windows-редакторы (и `Set-Content -Encoding utf8` в PowerShell 5.1) пишут UTF-8 с BOM.
+Для PHP это фатально: BOM попадает в вывод до `header()`, и страница падает с
+`Cannot modify header information - headers already sent by (...config_local.php:1)`.
+Для shell-конфигов BOM ломает первую строку (`#: not found`).
+
+`scripts/lib.sh` при рендеринге конфигов вырезает BOM. Если правите файлы вручную —
+сохраняйте без BOM (UTF-8 no BOM). Проверка:
+
+```sh
+head -c 3 file | hexdump -C     # не должно быть ef bb bf
+```
+
 ## FileBrowser
 
 - `users add` молча возвращает rc=1 — не работает в этой сборке.
