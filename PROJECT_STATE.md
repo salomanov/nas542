@@ -99,6 +99,7 @@
 | FileBrowser | 5007 | `/apps/fb/` | 2.62.1 |
 | Transmission | 5008 | `/transmission/` | 4.0.6 |
 | aria2 RPC | 6800 | `/jsonrpc` | 1.37 |
+| yt-dlp | CLI | `/opt/bin/yt-dlp` | 2026.08.19 (конфиг: `/opt/etc/yt-dlp.conf`, папка: `Apps/downloads/video`) |
 
 - **Прокси:** `mod_proxy` в `pkg_httpd` (Apache 2.2), правила —
   `/etc/pkg_service_conf/apps_proxy.conf`, подключаются в конец `httpd2.conf`.
