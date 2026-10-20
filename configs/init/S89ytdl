@@ -1,0 +1,41 @@
+#!/bin/sh
+NAME=ytdl
+DESC="yt-dlp Web UI"
+DAEMON=/opt/bin/php-cli
+ARGS="-S 0.0.0.0:5009 -t /i-data/45f1aca1/Apps/ytdl /i-data/45f1aca1/Apps/ytdl/router.php"
+PIDFILE=/opt/var/run/ytdl.pid
+LOGFILE=/i-data/45f1aca1/Apps/logs/ytdl.log
+RUNAS=admin
+
+case "$1" in
+start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        echo "$DESC already running"; exit 0
+    fi
+    mkdir -p /i-data/45f1aca1/Apps/logs /opt/var/run
+    start-stop-daemon --start --background --make-pidfile --pidfile "$PIDFILE" \
+        --chuid "$RUNAS" --chdir /i-data/45f1aca1/Apps/ytdl --exec "$DAEMON" -- $ARGS >>"$LOGFILE" 2>&1
+    sleep 2
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        echo "$DESC started (pid $(cat "$PIDFILE"))"
+    else
+        echo "$DESC failed"; exit 1
+    fi
+    ;;
+stop)
+    if [ -f "$PIDFILE" ]; then
+        start-stop-daemon --stop --pidfile "$PIDFILE" --retry 10 >/dev/null 2>&1
+        rm -f "$PIDFILE"
+    fi
+    echo "$DESC stopped"
+    ;;
+restart) "$0" stop; sleep 1; "$0" start ;;
+status)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        echo "$DESC running (pid $(cat "$PIDFILE"))"
+    else
+        echo "$DESC stopped"
+    fi
+    ;;
+*) echo "Usage: $0 {start|stop|restart|status}"; exit 1 ;;
+esac

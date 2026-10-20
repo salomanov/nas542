@@ -16,6 +16,7 @@
 | COPS (OPDS, книги) | `https://<WAN>:34501/apps/cops/feed.php` | `http://192.168.1.50:5000/apps/cops/feed.php` | из `00-secrets.env` |
 | Библиотека (веб-каталог) | `https://<WAN>:34501/apps/cops/` | `http://192.168.1.50:5000/apps/cops/` | из `00-secrets.env` |
 | FileBrowser | `https://<WAN>:34501/apps/fb/` | `http://192.168.1.50:5000/apps/fb/` | `admin` |
+| Загрузчик видео (yt-dlp) | `https://<WAN>:34501/apps/ytdl/` | `http://192.168.1.50:5000/apps/ytdl/` | `admin` |
 | AriaNg (aria2) | `https://<WAN>:34501/apps/aria/` | `http://192.168.1.50:5000/apps/aria/` | RPC-секрет |
 | Transmission | `https://<WAN>:34501/transmission/web/` | `http://192.168.1.50:5000/transmission/web/` | `admin` |
 

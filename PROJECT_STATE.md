@@ -19,6 +19,7 @@
 | **FileBrowser** | Проводник файлов в браузере | `https://178.140.8.56:34501/apps/fb/` | `https://192.168.1.50:5001/apps/fb/` | `admin` | `12345678` |
 | **Syncthing** | Синхронизация файлов | `https://178.140.8.56:34501/apps/sync/` | `https://192.168.1.50:5001/apps/sync/` | `admin` | `12345678` |
 | **Transmission** | Торрент-клиент | `https://178.140.8.56:34501/transmission/web/` | `https://192.168.1.50:5001/transmission/web/` | `admin` | `12345678` |
+| **Загрузчик медиа (yt-dlp)** | Веб-интерфейс видео/аудио | `https://178.140.8.56:34501/apps/ytdl/` | `https://192.168.1.50:5001/apps/ytdl/` | `admin` | `12345678` |
 | **AriaNg (aria2)** | Загрузчик файлов | `https://178.140.8.56:34501/apps/aria/` | `https://192.168.1.50:5001/apps/aria/` | — | Секрет: `Passw0rd` |
 | **aria2 JSON-RPC** | RPC для качалки | `https://178.140.8.56:34501/jsonrpc` | `https://192.168.1.50:5001/jsonrpc` | — | Секрет: `Passw0rd` |
 
@@ -98,8 +99,8 @@
 | AriaNg | 5006 | `/apps/aria/` | 1.3.15 |
 | FileBrowser | 5007 | `/apps/fb/` | 2.62.1 |
 | Transmission | 5008 | `/transmission/` | 4.0.6 |
+| yt-dlp Web UI | 5009 | `/apps/ytdl/` | 2026.08.19 (Web UI + yt-dlp) |
 | aria2 RPC | 6800 | `/jsonrpc` | 1.37 |
-| yt-dlp | CLI | `/opt/bin/yt-dlp` | 2026.08.19 (конфиг: `/opt/etc/yt-dlp.conf`, папка: `Apps/downloads/video`) |
 
 - **Прокси:** `mod_proxy` в `pkg_httpd` (Apache 2.2), правила —
   `/etc/pkg_service_conf/apps_proxy.conf`, подключаются в конец `httpd2.conf`.
