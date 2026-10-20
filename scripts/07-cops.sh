@@ -87,12 +87,106 @@ if 'styles/custom.css' not in s:
 open(p, 'w', encoding='utf-8').write(s)
 PY
 
+# main.html: страница настроек (page=19) в bootstrap-шаблоне теряет содержимое полей —
+# шаблон рисует только заголовок и счётчик. Берём свежую копию и учим её показывать entry.content.
+install -m 644 "$COPS_DIR/templates/bootstrap/main.html" "$THEME/main.html"
+/opt/bin/python3 - "$THEME/main.html" <<'PY'
+import sys
+p = sys.argv[1]
+s = open(p, encoding='utf-8', errors='surrogateescape').read()
+if 'NAS542: settings entries' in s:
+    print("  main.html already patched")
+else:
+    a = '    {{? it.containsBook == 0}}\n        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4">'
+    a_new = (
+        '    {{? it.containsBook == 0}}\n'
+        '        {{? entry.content}}\n'
+        '        <!-- NAS542: settings entries -->\n'
+        '        <div class="col-xs-12">\n'
+        '            <div class="panel panel-default">\n'
+        '                <div class="panel-heading">\n'
+        '                    <h2 class="panel-title">{{=htmlspecialchars (entry.title)}}</h2>\n'
+        '                </div>\n'
+        '                <div class="panel-body">{{=entry.content}}</div>\n'
+        '            </div>\n'
+        '        </div>\n'
+        '        {{??}}\n'
+        '        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4">')
+    b = '        </div>\n    {{??}}\n        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 books">'
+    b_new = '        </div>\n        {{?}}\n    {{??}}\n        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 books">'
+    if a in s and b in s:
+        s = s.replace(a, a_new, 1).replace(b, b_new, 1)
+        open(p, 'w', encoding='utf-8', errors='surrogateescape').write(s)
+        print("  main.html patched")
+    else:
+        print("  main.html: pattern not found, skipped")
+PY
+
 log "COPS: icons"
 if [ ! -f "$COPS_DIR/images/favicon.ico" ] || [ ! -f "$COPS_DIR/images/nas542-logo.png" ]; then
     /opt/bin/python3 "$CONFIGS/cops/theme/make_icon.py" "$COPS_DIR/images" || warn "icon generation failed"
 else
     echo "  icons already present"
 fi
+
+# ------------------------------------------------------------- settings page
+# Настройки COPS (index.php?page=19): вместо жёсткой ссылки «switch to Bootstrap»
+# даём нормальный выбор шаблона, включая нашу тему nas542.
+log "COPS: settings page"
+/opt/bin/python3 - "$COPS_DIR/lib/PageCustomize.php" <<'PY'
+import re, sys
+p = sys.argv[1]
+s = open(p, encoding='utf-8', errors='surrogateescape').read()
+if 'NAS542: theme dropdown' in s:
+    marker = 'array_push ($this->entryArray, new Entry ("Шаблон интерфейса", "", $content, "text", array ()));'
+    if marker in s and (marker + '\n        $content = "";') not in s:
+        s = s.replace(marker, marker + '\n        $content = "";', 1)
+        open(p, 'w', encoding='utf-8', errors='surrogateescape').write(s)
+        print("  PageCustomize.php fixed (content reset)")
+    else:
+        print("  PageCustomize.php already patched")
+else:
+    pat = re.compile(r'array_push\s*\(\s*\$this->entryArray,\s*new Entry\s*\(\s*"Template".*?array \(\)\)\);', re.S)
+    rep = (
+        '// NAS542: theme dropdown\n'
+        "        $labels = array ('nas542' => 'NAS542 (с логотипом)', 'bootstrap' => 'Bootstrap', 'default' => 'Default');\n"
+        '        $content = "<select id=\'template\' onchange=\'updateCookie (this); location.reload ();\'>";\n'
+        '        foreach ($labels as $tpl => $label) {\n'
+        '            if (!is_file ("templates/" . $tpl . "/header.html")) { continue; }\n'
+        '            $content .= "<option value=\'{$tpl}\'" . $this->isSelected ("template", $tpl) . ">{$label}</option>";\n'
+        '        }\n'
+        '        $content .= "</select>";\n'
+        '        array_push ($this->entryArray, new Entry ("Шаблон интерфейса", "", $content, "text", array ()));\n'
+        '        $content = "";'
+    )
+    new, n = pat.subn(lambda m: rep, s, count=1)
+    if n:
+        open(p, 'w', encoding='utf-8', errors='surrogateescape').write(new)
+        print("  PageCustomize.php patched")
+    else:
+        print("  PageCustomize.php: pattern not found, skipped")
+PY
+
+# Шестерёнка настроек в штатной теме bootstrap: если пользователь переключит
+# шаблон, страница настроек всё равно останется под рукой.
+/opt/bin/python3 - "$COPS_DIR/templates/bootstrap/header.html" <<'PY'
+import sys
+p = sys.argv[1]
+s = open(p, encoding='utf-8', errors='surrogateescape').read()
+if 'NAS542: settings gear' in s:
+    print("  bootstrap header already patched")
+else:
+    needle = '<ul class="nav navbar-nav navbar-right">'
+    gear = (needle + '\n'
+            '        <li><!-- NAS542: settings gear --><a href="index.php?page=19" data-toggle="tooltip" '
+            'data-placement="bottom" title="Настройки"><span class="glyphicon glyphicon-cog"></span>'
+            '<span class="visible-xs-inline"> Настройки</span></a></li>')
+    if needle in s:
+        open(p, 'w', encoding='utf-8', errors='surrogateescape').write(s.replace(needle, gear, 1))
+        print("  bootstrap header patched")
+    else:
+        print("  bootstrap header: pattern not found, skipped")
+PY
 
 # ---------------------------------------------------------------- modern UI
 log "COPS: modern interface"

@@ -152,6 +152,8 @@ img { display: block; max-width: 100%; }
     transition: background .15s, border-color .15s;
 }
 .icon-btn:hover { background: var(--surface-2); border-color: var(--line-strong); }
+a.icon-btn { color: inherit; }
+a.icon-btn:visited { color: inherit; }
 .icon-btn svg {
     width: 18px;
     height: 18px;

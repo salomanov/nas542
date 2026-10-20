@@ -18,10 +18,10 @@ if (!isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['HTTP_AUTHORIZATION'])
 }
 
 /*
- * Старые cookie могли зафиксировать другой шаблон/стиль (например после
- * экспериментов с «Default COPS template»). Всегда берём значения из конфига.
+ * Шаблон и стиль интерфейса теперь выбираются на странице настроек COPS
+ * (index.php?page=19, шестерёнка в шапке): выбор хранится в cookie.
+ * Чтобы вернуть тему NAS542, выберите «NAS542 (с логотипом)» и обновите страницу.
  */
-unset($_COOKIE['template'], $_COOKIE['style']);
 
 /* --- библиотека --- */
 $config['calibre_directory'] = '__APPS__/calibre/';
