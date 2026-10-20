@@ -28,16 +28,25 @@ check_code() {
         *)        bad "$1 -> $c (expected $2)" ;;
     esac
 }
+check_code_auth() {
+    c=$(curl -sk -o /dev/null -w '%{http_code}' --max-time 15 -u "$COPS_USER:$COPS_PASS" "$1")
+    case "|$2|" in
+        *"|$c|"*) ok "$1 -> $c (auth)" ;;
+        *)        bad "$1 -> $c (expected $2 with auth)" ;;
+    esac
+}
 check_code "https://127.0.0.1:5001/pkg/ownCloud/status.php" "200"
 check_code "http://127.0.0.1:5004/" "200|401"
-check_code "http://127.0.0.1:5005/feed.php" "200"
+check_code "http://127.0.0.1:5005/feed.php" "401"
+check_code_auth "http://127.0.0.1:5005/feed.php" "200"
 check_code "http://127.0.0.1:5006/" "200"
 check_code "http://127.0.0.1:5007/" "200|302"
 check_code "http://127.0.0.1:5008/transmission/web/" "200|401"
 
 say "Through pkg_httpd proxy (5001)"
 check_code "https://127.0.0.1:5001/apps/sync/" "200|401"
-check_code "https://127.0.0.1:5001/apps/cops/feed.php" "200"
+check_code "https://127.0.0.1:5001/apps/cops/feed.php" "401"
+check_code_auth "https://127.0.0.1:5001/apps/cops/feed.php" "200"
 check_code "https://127.0.0.1:5001/apps/aria/" "200"
 check_code "https://127.0.0.1:5001/apps/fb/" "200|302"
 
@@ -85,7 +94,7 @@ else
 fi
 
 say "OPDS"
-F=$(curl -sk --max-time 15 https://127.0.0.1:5001/apps/cops/feed.php)
+F=$(curl -sk --max-time 15 -u "$COPS_USER:$COPS_PASS" https://127.0.0.1:5001/apps/cops/feed.php)
 case "$F" in
     *"<feed"*) ok "OPDS feed is served ($(echo "$F" | grep -c '<entry>') entries)" ;;
     *)         bad "OPDS feed is not available" ;;

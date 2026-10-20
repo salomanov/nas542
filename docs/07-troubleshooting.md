@@ -101,6 +101,52 @@ head -c 3 file | hexdump -C     # не должно быть ef bb bf
 - CLI v2: только `--home`, нельзя `--config` + `--data`.
 - Device ID — ровно 63 символа (8 групп по 7). 62 символа → «invalid device ID».
 
+## COPS
+
+- **Пароль не принимается, хотя введён верный.** COPS работает под `php -S`, а
+  встроенный сервер не всегда заполняет `$_SERVER['PHP_AUTH_USER']`, и проверка
+  в `config.php` всегда видит пустого пользователя. Лечится в `config_local.php`
+  (этот блок уже есть в шаблоне): разобрать `HTTP_AUTHORIZATION` вручную **до**
+  проверки, потому что `config_local.php` подключается раньше неё.
+
+  ```php
+  if (!isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['HTTP_AUTHORIZATION'])
+      && preg_match('/^Basic\s+(.+)$/i', $_SERVER['HTTP_AUTHORIZATION'], $m)) {
+      $pair = base64_decode($m[1]);
+      if (strpos($pair, ':') !== false) {
+          list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) = explode(':', $pair, 2);
+      }
+  }
+  ```
+
+- **Своя тема не подхватилась.** `cops_template` — это *имя каталога* в `templates/`.
+  Каталог `nas542` должен содержать все файлы bootstrap (`header/footer/main/page/
+  bookdetail/suggestion/file.html`, `scripts/`, `styles/`), иначе клиентский рендер
+  молча ничего не выведет. CSS подключается в `file.html`: у bootstrap там нет
+  ссылки на `current_css`, поэтому свой `<link>` добавляется вручную.
+
+- **Клиент OPDS не видит книгу.** Проверьте `feed.php` с паролем
+  (`curl -u user:pass .../feed.php`): без авторизации COPS отдаёт `401` и пустое тело.
+
+## Импортёр книг
+
+- **Файл лежит в `inbox`, но ничего не происходит, лог пустой.** Демон
+  `S91bookimport` работает от `admin`, а лог-файл/каталоги созданы `root` — шелл не
+  может открыть `>>log`, команда не запускается, и ошибка уходит в `/dev/null`.
+  В `07-cops.sh` есть `chown admin:root` для `Apps/logs` и `Apps/calibre`; проверка:
+
+  ```sh
+  ls -l /i-data/45f1aca1/Apps/logs/bookimport.log
+  tail -f /i-data/45f1aca1/Apps/logs/bookimport.log
+  ```
+
+- **`Permission denied` при заливке в inbox по SFTP.** Каталог создан скриптом под
+  `root`, у `admin` нет прав на запись — тот же `chown -R admin:root`.
+
+- **Книга «не появилась».** Дубликат по паре «название + автор» пропускается и уезжает в
+  `inbox/_skipped/`. PDF/MOBI/AZW3 импортируются без метаданных (название = имя файла,
+  автор `Unknown`) — так и задумано, парсера PDF на этой машине нет.
+
 ## Сеть
 
 - Порты 5002/5003 заняты системным `DAV_httpd`.

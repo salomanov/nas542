@@ -31,6 +31,8 @@ load_secrets() {
     : "${TR_PASS:=}"
     : "${ARIA2_SECRET:=}"
     : "${ST_PASS:=}"
+    : "${COPS_USER:=admin}"
+    : "${COPS_PASS:=}"
 }
 
 require_secrets() {
@@ -38,6 +40,7 @@ require_secrets() {
     [ -n "$TR_PASS" ]      || die "TR_PASS is empty. Fill in scripts/00-secrets.env."
     [ -n "$ARIA2_SECRET" ] || die "ARIA2_SECRET is empty. Fill in scripts/00-secrets.env."
     [ -n "$ST_PASS" ]      || die "ST_PASS is empty. Fill in scripts/00-secrets.env."
+    [ -n "$COPS_PASS" ]    || die "COPS_PASS is empty. Fill in scripts/00-secrets.env."
 }
 
 # Escape for sed replacement: & | \ must stay literal.
@@ -52,6 +55,8 @@ render() {
         -e "s|__TR_PASS__|$(_esc "$TR_PASS")|g" \
         -e "s|__ARIA2_SECRET__|$(_esc "$ARIA2_SECRET")|g" \
         -e "s|__ST_PASS__|$(_esc "$ST_PASS")|g" \
+        -e "s|__COPS_USER__|$(_esc "$COPS_USER")|g" \
+        -e "s|__COPS_PASS__|$(_esc "$COPS_PASS")|g" \
         "$_src" > "$_dst"
 
     # Strip a UTF-8 BOM if the template had one: in PHP configs it is printed

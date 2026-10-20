@@ -13,7 +13,7 @@
 |---|---|---|---|
 | ownCloud 7 | `https://<WAN>:34501/pkg/ownCloud/` | `https://192.168.1.50:5001/pkg/ownCloud/` | `admin` |
 | Syncthing | `https://<WAN>:34501/apps/sync/` | `http://192.168.1.50:5000/apps/sync/` | из `00-secrets.env` |
-| COPS (OPDS, книги) | `https://<WAN>:34501/apps/cops/feed.php` | `http://192.168.1.50:5000/apps/cops/feed.php` | без пароля |
+| COPS (OPDS, книги) | `https://<WAN>:34501/apps/cops/feed.php` | `http://192.168.1.50:5000/apps/cops/feed.php` | из `00-secrets.env` |
 | FileBrowser | `https://<WAN>:34501/apps/fb/` | `http://192.168.1.50:5000/apps/fb/` | `admin` |
 | AriaNg (aria2) | `https://<WAN>:34501/apps/aria/` | `http://192.168.1.50:5000/apps/aria/` | RPC-секрет |
 | Transmission | `https://<WAN>:34501/transmission/web/` | `http://192.168.1.50:5000/transmission/web/` | `admin` |
@@ -22,6 +22,13 @@
 
 Всё это отдаётся через `mod_proxy` внутри `pkg_httpd`, поэтому **роутер трогать не нужно**:
 достаточно одного проброса `34501 → 5001`.
+
+### Как добавить книгу
+
+Положите файл в папку `Apps/calibre/inbox` любым удобным способом — FileBrowser,
+Syncthing (папка `apps`), WinSCP по SSH. Через минуту книга сама появится в каталоге
+COPS: обложка, автор, жанры и аннотация берутся из EPUB/FB2. Подробности —
+[docs/04-services.md](docs/04-services.md#автоимпорт-книг).
 
 ---
 
@@ -55,7 +62,7 @@ scripts/
   04-filebrowser.sh       — FileBrowser + пользователь
   05-transmission.sh      — Transmission
   06-aria2-ariang.sh      — aria2 + AriaNg
-  07-cops.sh              — COPS (OPDS) + composer vendor
+  07-cops.sh              — COPS (OPDS): тема, иконка, пароль, импортёр книг
   08-httpd-proxy.sh       — mod_proxy в pkg_httpd
   09-owncloud-shims.sh    — шимы OC10 для ownCloud 7
   lib.sh                  — общие функции

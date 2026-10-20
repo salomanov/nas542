@@ -112,7 +112,9 @@ php-cli -S 0.0.0.0:5006 -t /i-data/45f1aca1/Apps/ariang /i-data/45f1aca1/Apps/ar
 | Порт | 5005, путь `/apps/cops/` |
 | OPDS | `/apps/cops/feed.php` |
 | Библиотека | `/i-data/45f1aca1/Apps/calibre/` (`metadata.db` + книги) |
-| Конфиг | `config_local.php` |
+| Входящие книги | `/i-data/45f1aca1/Apps/calibre/inbox/` |
+| Конфиг | `config_local.php` (генерируется из `configs/cops/config_local.php`) |
+| Логин | `COPS_USER` / `COPS_PASS` из `scripts/00-secrets.env` |
 
 Почему не Calibre-Web/Kavita/Komga: нужен компилятор (нет `gcc`), Python 3.13 без готовых
 колёс под ARMv7 и ~200 МБ RAM (свободно ~90 МБ). COPS на PHP — единственный адекватный
@@ -133,8 +135,66 @@ php-cli -S 0.0.0.0:5006 -t /i-data/45f1aca1/Apps/ariang /i-data/45f1aca1/Apps/ar
    на `return @eval('return function ($it) { ' . $func . ' };');`
    (`create_function` удалён в PHP 8).
 
+### Что донастроено сверх стока
+
+**Русский интерфейс.** `$config['cops_language'] = 'ru'` — COPS берёт
+`lang/Localization_ru.json`, поэтому все подписи (Авторы, Жанры, Недавние поступления,
+Резюме) на русском. Название — «Библиотека NAS542», подзаголовок — «Домашняя библиотека».
+
+**Своя тема `nas542`.** Каталог `templates/nas542` — копия `bootstrap`, в которой:
+
+* `header.html` — свой навбар: логотип-книжка, название, поиск, кнопка «О программе».
+  Кнопка переключения на «дефолтный шаблон COPS» убрана (незачем на бытовом сервере);
+* `styles/custom.css` — синий градиент в шапке, скруглённые карточки с тенью при наведении,
+  аккуратные обложки, оранжевые бейджи;
+* `file.html` — добавлен `<link>` на `custom.css` и путь к `scripts/cops.js` поправлен
+  на `templates/nas542/`.
+
+Шаблон подключается через `$config['cops_template'] = 'nas542'`; COPS берёт тему просто
+по имени каталога, поэтому правки не затрагивают штатные `bootstrap`/`default`.
+
+**Иконка.** `images/favicon.ico` (16/32/48 px) и `images/nas542-logo.png` рисует
+`configs/cops/theme/make_icon.py` — чистый Python без Pillow, чтобы не тянуть зависимости.
+Скрипт создаёт PNG и ICO вручную (zlib + struct).
+
+**Пароль.** `$config['cops_basic_authentication']` — обычный HTTP Basic, работает и в
+браузере, и в OPDS-клиентах (Moon+ Reader спрашивает логин/пароль при добавлении каталога).
+Тонкость: COPS под `php -S` не всегда получает `PHP_AUTH_USER`, поэтому в
+`config_local.php` заголовок `Authorization` разбирается вручную (см. `docs/07-troubleshooting.md`).
+
+**Чистка навигации.** `$config['cops_ignored_categories']` убирает с главной полки
+«Серии», «Издательства», «Рейтинг», «Языки» — остаются авторы, жанры, названия,
+недавние поступления. `cops_recentbooks_limit = 12`, `cops_max_item_per_page = 30`.
+
+**Кэш обложек на диске.** `cops_thumbnail_cache_directory = calibre/.thumbs/`
+(`/tmp` — рамдиск на ~10 МБ, туда кэш складывать нельзя).
+
+### Автоимпорт книг
+
+Кладёте файл в `calibre/inbox/` — через минуту он появляется в каталоге.
+Работает демон `S91bookimport` (`cops-tools/bookimport-loop.sh`), он раз в 60 секунд
+запускает `cops-tools/import_books.py`.
+
+* **EPUB** — заголовок, авторы, язык, издательство, дата, жанры (subject), аннотация,
+  ISBN, серия и обложка (`cover-image` / `meta name="cover"`).
+* **FB2** — title-info, авторы, язык, жанры, аннотация, обложка из `<binary>`.
+* **PDF/MOBI/AZW3/DJVU** — без метаданных: название из имени файла, автор «Unknown»
+  (парсить PDF без сторонних библиотек на ARMv7 нечем).
+
+Книга копируется в структуру Calibre (`Автор/Название (id)/Название.epub`), обложка — в
+`cover.jpg`, запись добавляется в `metadata.db`. Дубликаты (то же название + автор)
+пропускаются и складываются в `inbox/_skipped/`. Лог — `Apps/logs/bookimport.log`.
+
+Ручной запуск:
+
+```sh
+/opt/bin/python3 /i-data/45f1aca1/Apps/cops-tools/import_books.py --dry-run   # что будет
+/opt/bin/python3 /i-data/45f1aca1/Apps/cops-tools/import_books.py             # импорт
+```
+
 Клиенты OPDS: Moon+ Reader, KOReader, Librera, Aldiko, Calibre iOS.
-В них добавляется каталог `https://host:34501/apps/cops/feed.php`, пароль не нужен.
+В них добавляется каталог `https://host:34501/apps/cops/feed.php` + логин/пароль COPS.
 
 Демо-библиотеку (3 книги с Project Gutenberg) собирает `tools/mklib.py` —
-он создаёт `metadata.db`, файлы книг и обложки.
+он создаёт `metadata.db`, файлы книг и обложки. Запускается только при `07-cops.sh --demo`.
+

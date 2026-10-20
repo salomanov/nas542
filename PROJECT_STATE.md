@@ -98,6 +98,14 @@
 - **COPS:** для composer доставлены `php8-mod-filter/intl/openssl/xml/ctype`;
   сборка только на диске (`/tmp` — рамдиск); пропатчен `create_function` в dot-php.
   Старая версия лежит в `Apps/cops-1.1.3` для отката.
+- **COPS, доработки (20.10.2026):** русский интерфейс (`cops_language=ru`),
+  своя тема `templates/nas542` (навбар с логотипом + `styles/custom.css`),
+  иконка `images/favicon.ico` (генерируется `make_icon.py`, без Pillow),
+  HTTP Basic по `COPS_USER`/`COPS_PASS`, скрыты полки series/publisher/rating/language,
+  кэш обложек на диске (`calibre/.thumbs`), 12 недавних книг и 30 на страницу.
+- **Автоимпорт книг:** `Apps/calibre/inbox` → `S91bookimport` (раз в 60 с) →
+  `cops-tools/import_books.py` (EPUB/FB2 с метаданными, остальное по имени файла) →
+  запись в `metadata.db` + файл в структуре Calibre. Лог `Apps/logs/bookimport.log`.
 - **Calibre-Web/Kavita/Komga не ставим:** нет gcc, Python 3.13 без колёс под ARMv7,
   ~200 МБ RAM при свободных ~90 МБ.
 - Свободно после всего: ~75–90 МБ RAM, swap не тронут.
@@ -109,4 +117,4 @@
 - Установка/восстановление: `docs/06-recovery.md`, скрипты `scripts/01..10`, запуск
   `scripts/tools/deploy.ps1`.
 - Секреты — в `scripts/00-secrets.env` (в `.gitignore`, в репозиторий не попадают).
-- Проверка состояния: `scripts/tools/healthcheck.sh` (23 проверки, все OK на 20.10.2026).
+- Проверка состояния: `scripts/tools/healthcheck.sh` (25 проверок, все OK на 20.10.2026).
