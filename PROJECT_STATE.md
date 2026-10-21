@@ -62,12 +62,13 @@
 - Корневой CA раздаётся в облаке: `https://178.140.8.56:34501/pkg/ownCloud/remote.php/webdav/Zyxel-NAS-CA.crt`.
 
 ## Доступ к облаку (клиенты)
-- **Официальное приложение ownCloud для Android 2.14.2 — РАБОТАЕТ** (через шимы, см. следующий раздел).
-- **Версии приложения:** работает вся линейка 2.x **до 2.14.2 включительно**. С 2.15 (июнь 2020) в changelog: «End of support for servers older than 10 version»; в APK 2.15+/3.x/4.x есть строка `server_not_supported` = «Your server version is lower than 10 so is not supported». Проверка смотрит на `status.php` (`7.0.15`) — то есть 2.15 … 4.8.4 на сервер не пустят.
-- Если приложение обновится само — появится именно это сообщение; лечится установкой APK 2.14.2 обратно.
-- URL для приложения: `https://178.140.8.56:34501/pkg/ownCloud` (только база, без `remote.php/...`), логин `admin`.
-- Nextcloud-приложение (35.x) — **не работает**: требует `/remote.php/dav` (spaces), сервер отвечает 404.
-- Другие WebDAV-клиенты: Android — X-plore (проверено, 207), FolderSync / Solid Explorer / Owlfiles; iOS — Owlfiles / Documents; Windows — RaiDrive, WinSCP (SFTP/34522) или штатный WebDAV-диск после установки CA.
+- **Официальное приложение ownCloud для Android (включая актуальные версии 3.x / 4.x из Google Play):**
+  - Сервер маскирует версию как `10.13.4` в `status.php` и `/ocs/v2.php/cloud/capabilities` (бэкапы `*.bak-v10`).
+  - Проверка версии в приложении (`OwncloudVersionNotSupportedException`) теперь успешно проходит.
+  - Аутентификация: `Basic HTTP Auth` (ввод логина и пароля в приложении).
+  - Работа с файлами: через наши OC10 DAV Shims (`/remote.php/dav/files/<user>/...` и chunked upload v2).
+  - URL для приложения: `https://178.140.8.56:34501/pkg/ownCloud` (или `https://192.168.1.50:5001/pkg/ownCloud` из дома), логин `admin`.
+- **Другие WebDAV-клиенты:** Android — X-plore (207), FolderSync, Solid Explorer; iOS — Owlfiles / Documents; Windows — RaiDrive, WinSCP (SFTP/34522) или сетевой диск WebDAV.
 - WebDAV URL для сторонних клиентов: `https://178.140.8.56:34501/pkg/ownCloud/remote.php/webdav/`, логин `admin`.
 - На Windows CA нужно поставить в машинное хранилище (нужен админ): `E:\Projects\NAS542\tls\install-ca-admin.cmd` (ПКМ → «Запуск от имени администратора»).
 
