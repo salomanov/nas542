@@ -28,9 +28,16 @@
 |---|---|---|---|
 | **SSH (PuTTY)** | **34522** | 22 | OpenSSH 6.7 (`admin` / пароль из `scripts/00-secrets.env`) |
 | **Веб-интерфейс NAS (Рабочий стол)** | **34502** | 80 | HTTP (`/r51209,/desktop,/index.html`) |
-| **Веб-пакеты (pkg_httpd HTTP)** | **34500** | 5000 | HTTP |
+| **Веб-пакеты (pkg_httpd HTTP)** | **34503** | 5000 | HTTP |
 | **Веб-пакеты (pkg_httpd HTTPS)** | **34501** | 5001 | HTTPS (ownCloud, etc.) |
+| **Веб-пакеты (UPnP fallback)** | **34504** | 5001 | HTTPS (запасной порт Keenetic UPnP) |
 | **WebDAV** | **34503** | 5002/5003 | DAV_httpd |
+
+## Персистентность прокси и портов (добавлено 21.10.2026)
+При удалении/установке пакетов через веб-интерфейс ZyXEL перегенерирует `/etc/pkg_service_conf/` и сбрасывает UPnP-правила роутера.
+Для автоматического восстановления развернуты демоны автозапуска Entware:
+1. `/opt/etc/init.d/S98apps-proxy` (`/i-data/45f1aca1/Apps/restore_proxy.sh`): восстанавливает `apps_proxy.conf`, добавляет `AuthZyxelSkipPattern /apps/ /transmission/ /jsonrpc` в `httpd2.conf` и `Entware-ng.conf`, делает `pkghttpd.sh reload`.
+2. `/opt/etc/init.d/S99upnp-ports` (`/i-data/45f1aca1/Apps/ensure_upnp_ports.py`): обращается по SOAP к MiniUPnPd на Keenetic (`192.168.1.1:1900`) и автоматически закрепляет проброс портов `34501 -> 5001`, `34502 -> 80`, `34522 -> 22`, `34523 -> 23`.
 
 ## Статус установленных пакетов
 1. **ownCloud:**
