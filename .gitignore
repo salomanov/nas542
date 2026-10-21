@@ -12,3 +12,5 @@ phone_screenshot.jpg
 *.tgz
 *.zip
 __pycache__/
+
+.backups/
