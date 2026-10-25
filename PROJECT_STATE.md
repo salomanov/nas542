@@ -101,11 +101,12 @@
 - Корневой CA раздаётся в облаке: `https://178.140.8.56:34501/pkg/ownCloud/remote.php/webdav/Zyxel-NAS-CA.crt`.
 
 ## Доступ к облаку (клиенты)
-- **Официальное приложение ownCloud для Android (включая актуальные версии 3.x / 4.x из Google Play):**
+- **Официальное приложение ownCloud для Android/iOS (включая актуальные версии из Google Play/App Store):**
   - Сервер маскирует версию как `10.13.4` в `status.php` и `/ocs/v2.php/cloud/capabilities` (бэкапы `*.bak-v10`).
   - Проверка версии в приложении (`OwncloudVersionNotSupportedException`) теперь успешно проходит.
   - Аутентификация: `Basic HTTP Auth` (ввод логина и пароля в приложении).
   - Работа с файлами: через наши OC10 DAV Shims (`/remote.php/dav/files/<user>/...` и chunked upload v2).
+  - **Поделиться файлом (Sharing API):** пропатчен `lib/private/ocs/cloud.php` (бэкап `.bak-sharing`). Теперь `/ocs/v2.php/cloud/capabilities` отдаёт блок `files_sharing` (`api_enabled: true`, `public: enabled: true`, `upload: true`, `resharing: true`). Кнопка «Поделиться», создание публичных ссылок и отправка файлов из мобильного приложения разблокированы и работают штатно.
   - URL для приложения: `https://178.140.8.56:34501/pkg/ownCloud` (или `https://192.168.1.50:5001/pkg/ownCloud` из дома), логин `admin`.
 - **Другие WebDAV-клиенты:** Android — X-plore (207), FolderSync, Solid Explorer; iOS — Owlfiles / Documents; Windows — RaiDrive, WinSCP (SFTP/34522) или сетевой диск WebDAV.
 - WebDAV URL для сторонних клиентов: `https://178.140.8.56:34501/pkg/ownCloud/remote.php/webdav/`, логин `admin`.
