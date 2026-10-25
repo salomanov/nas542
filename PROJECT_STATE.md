@@ -108,7 +108,8 @@
   - Работа с файлами: через наши OC10 DAV Shims (`/remote.php/dav/files/<user>/...` и chunked upload v2).
   - **Поделиться файлом (Sharing API):**
     1. Пропатчен `lib/private/ocs/cloud.php` (бэкап `.bak-sharing`): `/ocs/v2.php/cloud/capabilities` отдаёт блок `files_sharing` (`api_enabled: true`, `public: enabled: true`, `upload: true`, `resharing: true`).
-    2. Пропатчен `apps/files_sharing/lib/api.php` (бэкап `.bak-oc10compat`): `createShare` и `collectShares` теперь отдают полную структуру объекта Share стандарта ownCloud 10 (`share_type`, `url`, `name`, `permissions`, `expiration`, `displayname_owner`, поддержка JSON-тел), что предотвращает ошибку парсера Android/iOS (`share_server_unreachable`). Кнопка «Поделиться», создание публичных ссылок и копирование ссылки в мобильном приложении работают стабильно.
+    2. Пропатчен `apps/files_sharing/lib/api.php` (бэкап `.bak-oc10compat`): `createShare`, `getShare` и `collectShares` теперь отдают полную структуру объекта Share стандарта ownCloud 10 (`share_type`, `url`, `name`, `permissions`, `expiration`, `displayname_owner`, полное совпадение `path` через `Filesystem::getPath`, поддержка JSON-тел). Исправлен возврат массива при одиночном запросе `/shares/{id}`.
+    3. В публичный шаблон веб-страницы (`apps/files_sharing/templates/public.php`) добавлен блок отображения срока действия ссылки: `Срок действия ссылки: до DD.MM.YYYY HH:MM`.
   - URL для приложения: `https://178.140.8.56:34501/pkg/ownCloud` (или `https://192.168.1.50:5001/pkg/ownCloud` из дома), логин `admin`.
 - **Другие WebDAV-клиенты:** Android — X-plore (207), FolderSync, Solid Explorer; iOS — Owlfiles / Documents; Windows — RaiDrive, WinSCP (SFTP/34522) или сетевой диск WebDAV.
 - WebDAV URL для сторонних клиентов: `https://178.140.8.56:34501/pkg/ownCloud/remote.php/webdav/`, логин `admin`.

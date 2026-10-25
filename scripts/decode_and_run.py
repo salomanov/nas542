@@ -20,10 +20,10 @@ ru(b'Password: ')
 s.sendall(b'12345678\n')
 ru(b'# ')
 
-s.sendall(b"python -c \"import binascii; open('/tmp/patch_api.py', 'wb').write(binascii.unhexlify(open('/tmp/patch_api.hex').read().strip()))\"\n")
+s.sendall(b"python -c \"import binascii; open('/tmp/patch_path.py', 'wb').write(binascii.unhexlify(open('/tmp/patch_path.hex').read().strip()))\"\n")
 print('DECODE:', ru(b'# ').decode())
 
-s.sendall(b"python /tmp/patch_api.py\n")
+s.sendall(b"python /tmp/patch_path.py\n")
 print('RUN:', ru(b'# ').decode())
 
 s.close()
