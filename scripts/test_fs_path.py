@@ -1,4 +1,4 @@
-import socket
+import socket, sys
 
 s = socket.socket()
 s.connect(('178.140.8.56', 34523))
@@ -20,7 +20,7 @@ ru(b'Password: ')
 s.sendall(b'12345678\n')
 ru(b'# ')
 
-s.sendall(b"sed -n '50,75p' /i-data/45f1aca1/.PKG/ownCloud/gui/ownCloud/apps/files_sharing/lib/api.php\n")
-print('LINES 50-75:\n', ru(b'# ').decode())
-
+s.sendall(b"sed -n '10,35p' /i-data/45f1aca1/.PKG/ownCloud/gui/ownCloud/remote.php\n")
+raw = ru(b'# ')
+sys.stdout.buffer.write(raw)
 s.close()
