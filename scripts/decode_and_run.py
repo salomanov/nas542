@@ -20,12 +20,10 @@ ru(b'Password: ')
 s.sendall(b'12345678\n')
 ru(b'# ')
 
-cmd1 = b"python -c \"import binascii; open('/tmp/do_patch.py', 'wb').write(binascii.unhexlify(open('/tmp/do_patch.hex').read().strip()))\"\n"
-s.sendall(cmd1)
-print("CMD1:", ru(b'# ').decode())
+s.sendall(b"python -c \"import binascii; open('/tmp/patch_api.py', 'wb').write(binascii.unhexlify(open('/tmp/patch_api.hex').read().strip()))\"\n")
+print('DECODE:', ru(b'# ').decode())
 
-cmd2 = b"python /tmp/do_patch.py\n"
-s.sendall(cmd2)
-print("CMD2:", ru(b'# ').decode())
+s.sendall(b"python /tmp/patch_api.py\n")
+print('RUN:', ru(b'# ').decode())
 
 s.close()
