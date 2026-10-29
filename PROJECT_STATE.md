@@ -13,7 +13,7 @@
 | **SSH (PuTTY)** | Консоль / SFTP | `178.140.8.56:34522` | `192.168.1.50:22` | `admin` | `12345678` (root: `12345678`) |
 | **Веб-интерфейс NAS** | Рабочий стол ZyXEL | `http://178.140.8.56:34502/` | `http://192.168.1.50/` | `admin` | `12345678` |
 | **ownCloud 7** | Облачное хранилище | `https://178.140.8.56:34501/pkg/ownCloud/` | `https://192.168.1.50:5001/pkg/ownCloud/` | `admin` | `12345678` |
-| **Родной WebDAV (ZyXEL)** | Единый WebDAV для Mac Finder / ПК | `https://178.140.8.56:34503/webdav/` | `https://192.168.1.50:5003/webdav/` | `admin` | `12345678` |
+| **Родной WebDAV (ZyXEL)** | Единый WebDAV для Mac Finder / ПК | `https://178.140.8.56:34500/webdav/` (или `34503`) | `https://192.168.1.50:5003/webdav/` | `admin` | `12345678` |
 | **ownCloud WebDAV** | WebDAV для сторонних клиентов | `https://178.140.8.56:34501/pkg/ownCloud/remote.php/webdav/` | `https://192.168.1.50:5001/pkg/ownCloud/remote.php/webdav/` | `admin` | `12345678` |
 | **Библиотека (COPS UI)** | Веб-каталог книг | `https://178.140.8.56:34501/apps/cops/` | `https://192.168.1.50:5001/apps/cops/` | `admin` | `12345678` |
 | **COPS OPDS** | Каталог для читалок (FBReader) | `https://178.140.8.56:34501/apps/cops/feed.php` | `https://192.168.1.50:5001/apps/cops/feed.php` | `admin` | `12345678` |
@@ -29,7 +29,7 @@
 |---|---|---|---|
 | **SSH (PuTTY)** | **34522** | 22 | OpenSSH 6.7 (`admin` / пароль из `scripts/00-secrets.env`) |
 | **Веб-интерфейс NAS (Рабочий стол)** | **34502** | 80 | HTTP (`/r51209,/desktop,/index.html`) |
-| **Родной WebDAV NAS (HTTPS)** | **34503** | 5003 | HTTPS (`DAV_httpd`, прямой доступ к 4 дискам для Mac Finder) |
+| **Родной WebDAV NAS (HTTPS)** | **34500 / 34503** | 5003 | HTTPS (`DAV_httpd`, прямой доступ к 4 дискам для Mac Finder) |
 | **Веб-пакеты (pkg_httpd HTTPS)** | **34501** | 5001 | HTTPS (ownCloud, etc.) |
 | **Веб-пакеты (UPnP fallback)** | **34504** | 5001 | HTTPS (запасной порт Keenetic UPnP) |
 | **WebDAV** | **34503** | 5002/5003 | DAV_httpd |
