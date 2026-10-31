@@ -9,7 +9,11 @@ require_secrets
 SKIP_TLS=0
 [ "$1" = "--skip-tls" ] && SKIP_TLS=1
 
-STEPS="01-entware.sh 02-packages.sh 03-syncthing.sh 04-filebrowser.sh 05-transmission.sh 06-aria2-ariang.sh 07-cops.sh 08-httpd-proxy.sh 09-owncloud-shims.sh"
+STEPS="01-entware.sh 02-packages.sh"
+if [ "$ENABLE_SYNCTHING" = "1" ] || [ "$ENABLE_SYNCTHING" = "true" ]; then
+    STEPS="$STEPS 03-syncthing.sh"
+fi
+STEPS="$STEPS 04-filebrowser.sh 05-transmission.sh 06-aria2-ariang.sh 07-cops.sh 08-httpd-proxy.sh 09-owncloud-shims.sh"
 [ "$SKIP_TLS" = "1" ] || STEPS="$STEPS 10-tls.sh"
 
 FAILED=""

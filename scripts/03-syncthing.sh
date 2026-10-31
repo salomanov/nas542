@@ -4,6 +4,11 @@ SELF=$(cd "$(dirname "$0")" && pwd)
 . "$SELF/lib.sh"
 load_secrets
 
+if [ "$ENABLE_SYNCTHING" = "0" ] || [ "$ENABLE_SYNCTHING" = "false" ]; then
+    log "Syncthing is disabled via configuration (ENABLE_SYNCTHING=0). Skipping."
+    exit 0
+fi
+
 ST_HOME=$APPS/syncthing
 ST_FOLDER=$APPS/sync
 API=http://127.0.0.1:5004
@@ -70,7 +75,7 @@ fi
 
 log "Syncthing: folder apps"
 MYID=$(curl -s -H "X-API-Key: $KEY" "$API/rest/system/status" \
-       | /opt/bin/python3 -c 'import json,sys; print(json.load(sys.stdin)["myID"])' 2>/dev/null)
+       | grep -o '"myID":"[^"]*"' | head -1 | cut -d'"' -f4)
 [ -n "$MYID" ] || die "could not read myID"
 
 if curl -s -H "X-API-Key: $KEY" "$API/rest/config/folders/apps" | grep -q '"id"'; then

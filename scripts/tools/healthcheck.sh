@@ -12,7 +12,11 @@ bad() { BAD=$((BAD + 1)); printf '  [FAIL] %s\n' "$*"; }
 say() { echo ""; echo "--- $* ---"; }
 
 say "Ports"
-for p in 5000 5001 5004 5005 5006 5007 5008 6800; do
+PORTS="5000 5001 5005 5006 5007 5008 6800"
+if [ "$ENABLE_SYNCTHING" = "1" ] && [ ! -f /opt/etc/init.d/S90syncthing.disabled ]; then
+    PORTS="5000 5001 5004 5005 5006 5007 5008 6800"
+fi
+for p in $PORTS; do
     if netstat -tln 2>/dev/null | grep -q ":$p "; then
         ok "port $p is listening"
     else
@@ -36,7 +40,9 @@ check_code_auth() {
     esac
 }
 check_code "https://127.0.0.1:5001/pkg/ownCloud/status.php" "200"
-check_code "http://127.0.0.1:5004/" "200|401"
+if [ "$ENABLE_SYNCTHING" = "1" ] && [ ! -f /opt/etc/init.d/S90syncthing.disabled ]; then
+    check_code "http://127.0.0.1:5004/" "200|401"
+fi
 check_code "http://127.0.0.1:5005/feed.php" "401"
 check_code_auth "http://127.0.0.1:5005/feed.php" "200"
 check_code "http://127.0.0.1:5005/ui/" "401"
@@ -47,7 +53,9 @@ check_code "http://127.0.0.1:5007/" "200|302"
 check_code "http://127.0.0.1:5008/transmission/web/" "200|401"
 
 say "Through pkg_httpd proxy (5001)"
-check_code "https://127.0.0.1:5001/apps/sync/" "200|401"
+if [ "$ENABLE_SYNCTHING" = "1" ] && [ ! -f /opt/etc/init.d/S90syncthing.disabled ]; then
+    check_code "https://127.0.0.1:5001/apps/sync/" "200|401"
+fi
 check_code "https://127.0.0.1:5001/apps/cops/feed.php" "401"
 check_code_auth "https://127.0.0.1:5001/apps/cops/feed.php" "200"
 check_code "https://127.0.0.1:5001/apps/cops/ui/" "401"
@@ -85,18 +93,22 @@ if [ -n "$TR_PASS" ]; then
 fi
 
 say "Syncthing"
-CFG=$APPS/syncthing/config.xml
-if [ -f "$CFG" ]; then
-    KEY=$(sed -n 's|.*<apikey>\([^<]*\)</apikey>.*|\1|p' "$CFG" | head -1)
-    R=$(curl -s --max-time 10 -H "X-API-Key: $KEY" http://127.0.0.1:5004/rest/system/status)
-    MYID=$(echo "$R" | /opt/bin/python3 -c 'import json,sys; print(json.load(sys.stdin)["myID"])' 2>/dev/null)
-    if [ -n "$MYID" ]; then
-        ok "Syncthing is up, Device ID: $MYID"
-    else
-        bad "Syncthing REST does not answer"
-    fi
+if [ "$ENABLE_SYNCTHING" = "0" ] || [ -f /opt/etc/init.d/S90syncthing.disabled ] || [ ! -f /opt/etc/init.d/S90syncthing ]; then
+    ok "Syncthing is disabled (not active, RAM saved)"
 else
-    bad "no $CFG"
+    CFG=$APPS/syncthing/config.xml
+    if [ -f "$CFG" ]; then
+        KEY=$(sed -n 's|.*<apikey>\([^<]*\)</apikey>.*|\1|p' "$CFG" | head -1)
+        R=$(curl -s --max-time 10 -H "X-API-Key: $KEY" http://127.0.0.1:5004/rest/system/status)
+        MYID=$(echo "$R" | grep -o '"myID":"[^"]*"' | head -1 | cut -d'"' -f4)
+        if [ -n "$MYID" ]; then
+            ok "Syncthing is up, Device ID: $MYID"
+        else
+            bad "Syncthing REST does not answer"
+        fi
+    else
+        bad "no $CFG"
+    fi
 fi
 
 say "OPDS"

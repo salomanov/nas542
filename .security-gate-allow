@@ -1,0 +1,3 @@
+# Security Gate Allowlist for NAS542
+# Rule SEC-005 allows example template files with placeholder secrets
+scripts/00-secrets.env.example # Template file containing placeholder CHANGE_ME values

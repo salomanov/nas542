@@ -4,6 +4,8 @@ scripts/00-secrets.env
 # scratch / local only
 _fetch/
 debug/
+scratch/
+.agents/
 cookies.txt
 phone_screenshot.jpg
 
