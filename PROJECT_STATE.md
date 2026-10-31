@@ -18,7 +18,7 @@
 | **Библиотека (COPS UI)** | Веб-каталог книг | `https://178.140.8.56:34501/apps/cops/` | `https://192.168.1.50:5001/apps/cops/` | `admin` | `12345678` |
 | **COPS OPDS** | Каталог для читалок (FBReader) | `https://178.140.8.56:34501/apps/cops/feed.php` | `https://192.168.1.50:5001/apps/cops/feed.php` | `admin` | `12345678` |
 | **FileBrowser** | Проводник файлов в браузере | `https://178.140.8.56:34501/apps/fb/` | `https://192.168.1.50:5001/apps/fb/` | `admin` | `12345678` |
-| **Syncthing** | Синхронизация файлов | `https://178.140.8.56:34501/apps/sync/` | `https://192.168.1.50:5001/apps/sync/` | `admin` | `12345678` |
+| **Syncthing** | Синхронизация файлов | *(Отключен для экономии RAM)* | *(Отключен)* | `admin` | `12345678` |
 | **Transmission** | Торрент-клиент | `https://178.140.8.56:34501/transmission/web/` | `https://192.168.1.50:5001/transmission/web/` | `admin` | `12345678` |
 | **Загрузчик медиа (yt-dlp)** | Веб-интерфейс видео/аудио | `https://178.140.8.56:34501/apps/ytdl/` | `https://192.168.1.50:5001/apps/ytdl/` | `admin` | `12345678` |
 | **AriaNg (aria2)** | Загрузчик файлов | `https://178.140.8.56:34501/apps/aria/` | `https://192.168.1.50:5001/apps/aria/` | — | Секрет: `Passw0rd` |
@@ -282,3 +282,20 @@
   - `COPS Библиотека / OPDS` (порт 5005 / `/apps/cops/`): **OK (HTTP 401 Auth)**.
   - `Родной WebDAV DAV_httpd` (порты 34500 и 5003 / `/webdav/`): **OK (HTTP 207 Multi-Status)**.
   - `Samba SMB` (демоны `smbd` / `nmbd`, шара `\\178.140.8.56\Cloud`): **OK**.
+
+## Рефакторинг репозитория и оптимизация памяти (01.11.2026)
+- **Syncthing отключен:**
+  - Служба `/opt/etc/init.d/S90syncthing` переименована в `.disabled`, процессы завершены.
+  - Освобождено ~100 МБ виртуальной памяти и снижена фоновая нагрузка на CPU.
+  - Порт 5004 закрыт, в `00-secrets.env` и `03-syncthing.sh` добавлен флаг `ENABLE_SYNCTHING=0`.
+- **Безопасность:**
+  - Удален файл `scripts/test_paramiko.py` с захардкоженными паролями.
+  - Удалены внутренние отладочные скрипты агента (`search_transcript.py`, `print_steps*.py`).
+  - Файл `scripts/00-secrets.env.example` внесен в `.security-gate-allow` как безопасный шаблон.
+- **Очистка репозитория:**
+  - Папка `scripts/` структурирована: 107 устаревших одноразовых скриптов перемещены в `scripts/archive/legacy_patches/`.
+  - Основной пайплайн чист и состоит из этапов `01..10` и папки `tools/`.
+  - Служебные каталоги `scratch/` и `.agents/` добавлены в `.gitignore`.
+- **Результаты проверки:**
+  - `doctor.ps1`: Все проверки пройдены, блокеров нет (`SECURITY GATE PASSED`).
+  - Remote Healthcheck: `OK=28, FAIL=0` (все веб-сервисы, WebDAV, OPDS, torrents и proxies работают стабильно).
