@@ -15,6 +15,14 @@
 if (!OC_User::isLoggedIn()) {
 	$u = isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '';
 	$p = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : '';
+	if ($u === '' && !empty($_SERVER['HTTP_AUTHORIZATION'])) {
+		if (stripos($_SERVER['HTTP_AUTHORIZATION'], 'basic ') === 0) {
+			$cred = base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6));
+			if (strpos($cred, ':') !== false) {
+				list($u, $p) = explode(':', $cred, 2);
+			}
+		}
+	}
 	if ($u === '' || !OC_User::login($u, $p)) {
 		header('WWW-Authenticate: Basic realm="ownCloud"');
 		header('HTTP/1.1 401 Unauthorized');
@@ -42,6 +50,28 @@ if ($reqUser !== '' && $reqUser !== $user) {
 	header('HTTP/1.1 403 Forbidden');
 	exit;
 }
+
+// OPTIONS on root or transfer
+if ($method === 'OPTIONS') {
+	header('Allow: MKCOL, PUT, MOVE, DELETE, PROPFIND, OPTIONS');
+	header('DAV: 1, 3, extended-mkcol');
+	header('HTTP/1.1 200 OK');
+	exit;
+}
+
+// PROPFIND on root
+if ($method === 'PROPFIND' && $tid === '') {
+	header('Content-Type: application/xml; charset=utf-8');
+	header('HTTP/1.1 207 Multi-Status');
+	echo '<?xml version="1.0" encoding="utf-8"?>' . "\n";
+	echo '<d:multistatus xmlns:d="DAV:">';
+	echo '<d:response><d:href>' . htmlspecialchars($pi) . '</d:href>';
+	echo '<d:propstat><d:prop><d:resourcetype><d:collection/></d:resourcetype></d:prop>';
+	echo '<d:status>HTTP/1.1 200 OK</d:status></d:propstat></d:response>';
+	echo '</d:multistatus>';
+	exit;
+}
+
 if ($tid === '' || !preg_match('/^[A-Za-z0-9._-]+$/', $tid)) {
 	header('HTTP/1.1 400 Bad Request');
 	exit;
@@ -78,7 +108,7 @@ function shim_dest_path($user) {
 	if ($path === false || $path === null) {
 		return false;
 	}
-	if (!preg_match('#/dav/files/[^/]+(/.*)$#', $path, $m)) {
+	if (!preg_match('#/(?:dav/files/[^/]+|webdav)(/.*)$#', $path, $m)) {
 		return false;
 	}
 	$rel = urldecode($m[1]);
@@ -142,11 +172,15 @@ switch ($method) {
 		}
 		$real = array();
 		foreach ($chunks as $c) {
-			if (is_file($c) && basename($c) !== '.file') {
+			if (is_file($c) && basename($c) !== '.file' && basename($c) !== '.assembled') {
 				$real[] = $c;
 			}
 		}
-		sort($real, SORT_STRING);
+		if (defined('SORT_NATURAL')) {
+			sort($real, SORT_NATURAL);
+		} else {
+			natsort($real);
+		}
 
 		$view = new \OC\Files\View('/' . $user . '/files');
 		$parent = dirname($rel);
@@ -175,6 +209,29 @@ switch ($method) {
 			fclose($in);
 		}
 
+		$mtime = 0;
+		if (isset($_SERVER['HTTP_X_OC_MTIME'])) {
+			$mtime = (int)$_SERVER['HTTP_X_OC_MTIME'];
+		} elseif (isset($_SERVER['HTTP_X_OC_MTIME_PART'])) {
+			$mtime = (int)$_SERVER['HTTP_X_OC_MTIME_PART'];
+		}
+		if ($mtime > 0) {
+			$view->touch($rel, $mtime);
+		}
+
+		$info = $view->getFileInfo($rel);
+		if ($info) {
+			$etag = $info->getEtag();
+			$fileId = $info->getId();
+			if ($etag) {
+				header('ETag: "' . $etag . '"');
+				header('OC-ETag: "' . $etag . '"');
+			}
+			if ($fileId) {
+				header('OC-FileId: ' . $fileId);
+			}
+		}
+
 		shim_rmdir($dir);
 		@rmdir(dirname($dir));
 
@@ -188,6 +245,7 @@ switch ($method) {
 	case 'DELETE':
 		$target = $chunk === '' ? $dir : $dir . '/' . $chunk;
 		shim_rmdir($target);
+		@rmdir(dirname($dir));
 		header('HTTP/1.1 204 No Content');
 		exit;
 
@@ -199,13 +257,38 @@ switch ($method) {
 		echo '<d:response><d:href>' . htmlspecialchars($pi) . '</d:href>';
 		echo '<d:propstat><d:prop><d:resourcetype><d:collection/></d:resourcetype></d:prop>';
 		echo '<d:status>HTTP/1.1 200 OK</d:status></d:propstat></d:response>';
+		if (is_dir($dir)) {
+			$depth = isset($_SERVER['HTTP_DEPTH']) ? $_SERVER['HTTP_DEPTH'] : '1';
+			if ($depth !== '0') {
+				$files = glob($dir . '/*');
+				if ($files) {
+					foreach ($files as $f) {
+						if (!is_file($f)) continue;
+						$bn = basename($f);
+						if ($bn === '.file' || $bn === '.assembled') continue;
+						$sz = filesize($f);
+						$href = rtrim($pi, '/') . '/' . $bn;
+						echo '<d:response>';
+						echo '<d:href>' . htmlspecialchars($href) . '</d:href>';
+						echo '<d:propstat><d:prop>';
+						echo '<d:getcontentlength>' . $sz . '</d:getcontentlength>';
+						echo '<d:resourcetype/>';
+						echo '</d:prop><d:status>HTTP/1.1 200 OK</d:status></d:propstat>';
+						echo '</d:response>';
+					}
+				}
+			}
+		}
 		echo '</d:multistatus>';
 		exit;
 
-	case 'OPTIONS':
-		header('Allow: MKCOL, PUT, MOVE, DELETE, PROPFIND, OPTIONS');
-		header('DAV: 1, 3, extended-mkcol');
-		header('HTTP/1.1 200 OK');
+	case 'HEAD':
+	case 'GET':
+		if (is_dir($dir)) {
+			header('HTTP/1.1 200 OK');
+			exit;
+		}
+		header('HTTP/1.1 404 Not Found');
 		exit;
 
 	default:

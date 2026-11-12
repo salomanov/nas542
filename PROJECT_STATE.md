@@ -123,10 +123,24 @@
   2. XML-ответы (`Content-Type: *xml*`) проходят через `str_replace`: `href` `/remote.php/webdav/` → `/remote.php/dav/files/<user>/` (фильтр только для XML, бинарные скачивания не трогаются, буфер 1 МБ);
   3. `/dav/uploads/...` → подключает `dav-uploads-shim.php`.
 - **`dav-uploads-shim.php`** — реализация chunked upload v2: `MKCOL` (201), `PUT` чанка (201), `MOVE` `.file` → сборка чанков и запись через `\OC\Files\View::file_put_contents` (201), `DELETE` (204), `PROPFIND`/`OPTIONS`. Временные чанки: `<datadirectory>/uploads_shim/<user>/<transferid>/`.
+  - Улучшения (12.11.2026): естественная сортировка чанков (`SORT_NATURAL`), безопасный fallback декодирования Basic Auth, обработка `OPTIONS`/`PROPFIND` на корне uploads, передача заголовков `ETag`, `OC-ETag`, `OC-FileId`, `X-OC-MTime`.
+- **`lib/private/ocs/cloud.php`** (бэкап `.bak-chunking`):
+  - Добавлена capability `'dav' => array('chunking' => '1.0')`.
+- **`apps/files/lib/capabilities.php`** (бэкап `.bak-chunking`):
+  - Добавлена capability `'chunked_upload_v2' => true`.
 - **`ocs/v2.php`** — копия `v1.php` (современные клиенты стучатся в v2, ответы в формате v1).
-- Локальные копии/скрипты: `E:\Projects\NAS542\debug\dav-shim.block`, `dav-uploads-shim.php`, `oc-dav-shim-fix.sh`, `enable-oc-log.sh`.
-- Откат: вернуть `remote.php.bak-davshim` на место, удалить `dav-uploads-shim.php`, `ocs/v2.php`.
-- Проверено: PROPFIND 207 с правильными href, полный цикл загрузки, скачивание PDF 2 025 905 б без искажений.
+- Локальные копии/скрипты: `E:\Projects\NAS542\configs\owncloud\dav-shim.block`, `configs/owncloud/dav-uploads-shim.php`.
+- Откат: вернуть `remote.php.bak-davshim`, `cloud.php.bak-chunking`, `capabilities.php.bak-chunking`, удалить `dav-uploads-shim.php`.
+- Проверено: полный цикл чанковой загрузки по внешнему WAN (3 MB бинарный файл, 3 чанка по 1 MB, 201 Created на каждом этапе, SHA256 совпал на 100%).
+
+## Исправление мобильной загрузки больших файлов (12.11.2026)
+- **Симптом:** При попытке загрузить большой файл (~335 МБ, `ImplaStationMacOs_v5.5.0_build017_Released.dmg`) через мобильное приложение ownCloud (Android `ownCloud-android/3.0.1`) происходил сбой. В логах: `Sabre\DAV\Exception\BadRequest: expected filesize 351895933 got 135426048` (или `43020288`).
+- **Первопричина:** В ответе `/ocs/v2.php/cloud/capabilities` отсутствовал блок `"dav": {"chunking": "1.0"}`. Из-за этого современный клиент отключал чанкование и пытался загрузить файл одним непрерывным монолитным потоком PUT. При малейших задержках или обрывах мобильного интернета поток прерывался на середине, а SabreDAV отклонял усеченный файл с ошибкой 400 Bad Request.
+- **Решение:**
+  1. В `lib/private/ocs/cloud.php` добавлено объявление `'dav' => array('chunking' => '1.0')`.
+  2. В `apps/files/lib/capabilities.php` добавлено `'chunked_upload_v2' => true`.
+  3. Обновлен и протестирован `dav-uploads-shim.php` на NAS (`nobody:nogroup`, `uploads_shim` `nobody:nobody`).
+  4. Сквозной тест чанкования через публичный WAN-интерфейс (`https://178.140.8.56:34501/...`) подтвердил штатное создание коллекции (`MKCOL` 201), приём всех чанков (`PUT` 201), сборку (`MOVE` 201 с ETag/FileId) и побайтовую целостность (SHA256).
 
 ## Известные мелочи
 - **Временно включён** `CustomLog /var/log/httpd/oc_access.log` в `/etc/pkg_service_conf/httpd_zld2.conf` (бэкап `.bak-log`) — для диагностики приложения. Лог в памяти (tmpfs), после стабилизации убрать и сделать `pkghttpd.sh reload`.
