@@ -147,15 +147,36 @@ switch ($method) {
 		if (!is_dir($dir)) {
 			@mkdir($dir, 0770, true);
 		}
+		$targetChunk = $dir . '/' . $chunk;
 		$in  = fopen('php://input', 'rb');
-		$out = fopen($dir . '/' . $chunk, 'wb');
+		$out = fopen($targetChunk, 'wb');
 		if (!$in || !$out) {
 			header('HTTP/1.1 500 Internal Server Error');
 			exit;
 		}
+
+		$completed = false;
+		register_shutdown_function(function() use (&$completed, $targetChunk) {
+			if (!$completed && file_exists($targetChunk)) {
+				@unlink($targetChunk);
+			}
+		});
+
 		stream_copy_to_stream($in, $out);
 		fclose($in);
 		fclose($out);
+
+		if (isset($_SERVER['CONTENT_LENGTH'])) {
+			$expected = (int)$_SERVER['CONTENT_LENGTH'];
+			$actual   = @filesize($targetChunk);
+			if ($expected > 0 && $actual !== $expected) {
+				@unlink($targetChunk);
+				header('HTTP/1.1 400 Bad Request');
+				exit;
+			}
+		}
+
+		$completed = true;
 		header('HTTP/1.1 201 Created');
 		exit;
 
@@ -180,6 +201,21 @@ switch ($method) {
 			sort($real, SORT_NATURAL);
 		} else {
 			natsort($real);
+		}
+
+		// Integrity check: if chunks are sequentially numbered (Android ownCloud style)
+		if (count($real) > 1 && ctype_digit(basename($real[0]))) {
+			$chunkSize = filesize($real[0]);
+			for ($i = 0; $i < count($real) - 1; $i++) {
+				if ((int)basename($real[$i]) !== $i || filesize($real[$i]) !== $chunkSize) {
+					header('HTTP/1.1 400 Bad Request');
+					exit;
+				}
+			}
+			if ((int)basename($real[count($real) - 1]) !== count($real) - 1) {
+				header('HTTP/1.1 400 Bad Request');
+				exit;
+			}
 		}
 
 		$view = new \OC\Files\View('/' . $user . '/files');
