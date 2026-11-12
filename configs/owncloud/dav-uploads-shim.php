@@ -167,16 +167,19 @@ switch ($method) {
 		fclose($out);
 
 		if (isset($_SERVER['CONTENT_LENGTH'])) {
+			clearstatcache(true, $targetChunk);
 			$expected = (int)$_SERVER['CONTENT_LENGTH'];
 			$actual   = @filesize($targetChunk);
 			if ($expected > 0 && $actual !== $expected) {
 				@unlink($targetChunk);
+				@file_put_contents($tmpRoot . '/shim.log', date('[Y-m-d H:i:s] ') . "PUT truncated chunk $chunk: expected $expected got $actual (IP=" . (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '-') . ")\n", FILE_APPEND);
 				header('HTTP/1.1 400 Bad Request');
 				exit;
 			}
 		}
 
 		$completed = true;
+		@file_put_contents($tmpRoot . '/shim.log', date('[Y-m-d H:i:s] ') . "PUT ok chunk $chunk (sz=" . @filesize($targetChunk) . ")\n", FILE_APPEND);
 		header('HTTP/1.1 201 Created');
 		exit;
 
