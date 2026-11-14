@@ -29,7 +29,7 @@
 |---|---|---|---|
 | **SSH (PuTTY)** | **34522** | 22 | OpenSSH 6.7 (`admin` / пароль из `scripts/00-secrets.env`) |
 | **Веб-интерфейс NAS (Рабочий стол)** | **34502** | 80 | HTTP (`/r51209,/desktop,/index.html`) |
-| **Родной WebDAV NAS (HTTPS)** | **34500 / 34503** | 5003 | HTTPS (`DAV_httpd`, прямой доступ к 4 дискам для Mac Finder) |
+| **Родной WebDAV NAS (HTTPS)** | **34500** | 5003 | HTTPS (`DAV_httpd`, прямой доступ к 4 дискам для Mac Finder / Solid Explorer) |
 | **Веб-пакеты (pkg_httpd HTTPS)** | **34501** | 5001 | HTTPS (ownCloud, etc.) |
 | **Веб-пакеты (UPnP fallback)** | **34504** | 5001 | HTTPS (запасной порт Keenetic UPnP) |
 | **WebDAV** | **34503** | 5002/5003 | DAV_httpd |
