@@ -1,0 +1,526 @@
+{
+  "communities": {
+    "0": [
+      "scripts_archive_legacy_patches_add_keenetic_ports",
+      "scripts_archive_legacy_patches_add_upnp_dav",
+      "scripts_archive_legacy_patches_apply_oc_v10_spoof",
+      "scripts_archive_legacy_patches_cat_pkg2",
+      "scripts_archive_legacy_patches_check_apps_proxy_file",
+      "scripts_archive_legacy_patches_check_charset",
+      "scripts_archive_legacy_patches_check_oc_apps",
+      "scripts_archive_legacy_patches_check_oc_db",
+      "scripts_archive_legacy_patches_check_ocs_caps",
+      "scripts_archive_legacy_patches_check_router",
+      "scripts_archive_legacy_patches_check_running_apps",
+      "scripts_archive_legacy_patches_check_upnp",
+      "scripts_archive_legacy_patches_clean_smb_conf",
+      "scripts_archive_legacy_patches_deploy_restore_proxy",
+      "scripts_archive_legacy_patches_diag_smb",
+      "scripts_archive_legacy_patches_discover_upnp",
+      "scripts_archive_legacy_patches_find_fb_init",
+      "scripts_archive_legacy_patches_find_files",
+      "scripts_archive_legacy_patches_inspect_after_reboot",
+      "scripts_archive_legacy_patches_inspect_dav_auth",
+      "scripts_archive_legacy_patches_inspect_disk_shares",
+      "scripts_archive_legacy_patches_inspect_shares2",
+      "scripts_archive_legacy_patches_inspect_upnp",
+      "scripts_archive_legacy_patches_ls_oc",
+      "scripts_archive_legacy_patches_patch_cloud_php",
+      "scripts_archive_legacy_patches_patch_upnp",
+      "scripts_archive_legacy_patches_query_keenetic_upnp",
+      "scripts_archive_legacy_patches_setup_upnp_daemon",
+      "scripts_archive_legacy_patches_start_bg_subshell",
+      "scripts_archive_legacy_patches_step1_organize_files",
+      "scripts_archive_legacy_patches_test_fb_symlink",
+      "scripts_archive_legacy_patches_test_lan_conn",
+      "scripts_archive_legacy_patches_test_nas_lan",
+      "scripts_archive_legacy_patches_test_native_dav_propfind",
+      "scripts_archive_legacy_patches_test_oc_scan",
+      "scripts_archive_legacy_patches_test_root_urls",
+      "scripts_archive_legacy_patches_test_samba_utf8",
+      "scripts_archive_legacy_patches_test_utf8",
+      "scripts_archive_legacy_patches_test_web_local",
+      "socket"
+    ],
+    "1": [
+      "scripts_archive_legacy_patches_append_smb_clean",
+      "scripts_archive_legacy_patches_audit_disk_contents",
+      "scripts_archive_legacy_patches_cat_ocs_cloud",
+      "scripts_archive_legacy_patches_cat_status_php",
+      "scripts_archive_legacy_patches_check_all_state",
+      "scripts_archive_legacy_patches_check_apps_and_leftovers",
+      "scripts_archive_legacy_patches_check_bg_progress",
+      "scripts_archive_legacy_patches_check_disks_listing",
+      "scripts_archive_legacy_patches_check_entware_conf",
+      "scripts_archive_legacy_patches_check_move",
+      "scripts_archive_legacy_patches_check_oc_files",
+      "scripts_archive_legacy_patches_check_pkg_conf",
+      "scripts_archive_legacy_patches_check_real_repr",
+      "scripts_archive_legacy_patches_check_routes",
+      "scripts_archive_legacy_patches_check_samba_remote",
+      "scripts_archive_legacy_patches_check_script_status",
+      "scripts_archive_legacy_patches_check_sharing_app",
+      "scripts_archive_legacy_patches_check_smb_paths",
+      "scripts_archive_legacy_patches_check_upnp_nas",
+      "scripts_archive_legacy_patches_find_caps_fn",
+      "scripts_archive_legacy_patches_find_cloud_cls",
+      "scripts_archive_legacy_patches_find_cloud_ref",
+      "scripts_archive_legacy_patches_finish_setup",
+      "scripts_archive_legacy_patches_inspect_dav",
+      "scripts_archive_legacy_patches_inspect_dav_conf",
+      "scripts_archive_legacy_patches_inspect_dav_gen",
+      "scripts_archive_legacy_patches_inspect_disks",
+      "scripts_archive_legacy_patches_inspect_folders_detail",
+      "scripts_archive_legacy_patches_inspect_packages_and_desktop",
+      "scripts_archive_legacy_patches_inspect_sharing",
+      "scripts_archive_legacy_patches_query_keenetic_upnp2",
+      "scripts_archive_legacy_patches_remove_old_disks",
+      "scripts_archive_legacy_patches_run_bg_move",
+      "scripts_archive_legacy_patches_setup_clean_structure",
+      "scripts_archive_legacy_patches_setup_samba_shares",
+      "scripts_archive_legacy_patches_start_dropbear",
+      "scripts_archive_legacy_patches_test_oc_and_downloads",
+      "scripts_archive_legacy_patches_update_smb_py",
+      "scripts_archive_legacy_patches_verify_final",
+      "time"
+    ],
+    "2": [
+      "scripts_01_entware",
+      "scripts_01_entware_sh__entry",
+      "scripts_02_packages",
+      "scripts_02_packages_sh__entry",
+      "scripts_02_packages_wait_opkg",
+      "scripts_03_syncthing",
+      "scripts_03_syncthing_sh__entry",
+      "scripts_04_filebrowser",
+      "scripts_04_filebrowser_sh__entry",
+      "scripts_05_transmission",
+      "scripts_05_transmission_sh__entry",
+      "scripts_06_aria2_ariang",
+      "scripts_06_aria2_ariang_sh__entry",
+      "scripts_07_cops",
+      "scripts_07_cops_sh__entry",
+      "scripts_08_httpd_proxy",
+      "scripts_08_httpd_proxy_check",
+      "scripts_08_httpd_proxy_sh__entry",
+      "scripts_09_owncloud_shims",
+      "scripts_09_owncloud_shims_sh__entry",
+      "scripts_10_tls",
+      "scripts_10_tls_sh__entry",
+      "scripts_install_all",
+      "scripts_install_all_sh__entry",
+      "scripts_lib",
+      "scripts_lib_die",
+      "scripts_lib_esc",
+      "scripts_lib_http_code",
+      "scripts_lib_install_init",
+      "scripts_lib_load_secrets",
+      "scripts_lib_log",
+      "scripts_lib_path",
+      "scripts_lib_render",
+      "scripts_lib_require_secrets",
+      "scripts_lib_sh__entry",
+      "scripts_lib_wait_port",
+      "scripts_lib_warn"
+    ],
+    "3": [
+      "os",
+      "posixpath",
+      "re",
+      "scripts_tools_import_books",
+      "scripts_tools_import_books_author_sort",
+      "scripts_tools_import_books_clean_text",
+      "scripts_tools_import_books_ensure_db",
+      "scripts_tools_import_books_epub_meta",
+      "scripts_tools_import_books_epub_meta_texts",
+      "scripts_tools_import_books_fb2_meta",
+      "scripts_tools_import_books_fb2_meta_texts",
+      "scripts_tools_import_books_get_or_create",
+      "scripts_tools_import_books_import_one",
+      "scripts_tools_import_books_inspect_file",
+      "scripts_tools_import_books_local",
+      "scripts_tools_import_books_log",
+      "scripts_tools_import_books_main",
+      "scripts_tools_import_books_norm_date",
+      "scripts_tools_import_books_rationale_2",
+      "scripts_tools_import_books_safe_name",
+      "scripts_tools_import_books_scan",
+      "scripts_tools_mklib",
+      "shutil",
+      "sqlite3",
+      "uuid",
+      "xml_etree_elementtree",
+      "zipfile"
+    ],
+    "4": [
+      "configs_cops_ui_assets_app",
+      "configs_cops_ui_assets_app_applyroute",
+      "configs_cops_ui_assets_app_applytheme",
+      "configs_cops_ui_assets_app_cardhtml",
+      "configs_cops_ui_assets_app_closemodal",
+      "configs_cops_ui_assets_app_closenav",
+      "configs_cops_ui_assets_app_facetname",
+      "configs_cops_ui_assets_app_formatactions",
+      "configs_cops_ui_assets_app_hidestate",
+      "configs_cops_ui_assets_app_humansize",
+      "configs_cops_ui_assets_app_initials",
+      "configs_cops_ui_assets_app_loadbooks",
+      "configs_cops_ui_assets_app_loadfacets",
+      "configs_cops_ui_assets_app_openbook",
+      "configs_cops_ui_assets_app_parsehash",
+      "configs_cops_ui_assets_app_plain",
+      "configs_cops_ui_assets_app_plural",
+      "configs_cops_ui_assets_app_renderbook",
+      "configs_cops_ui_assets_app_showstate",
+      "configs_cops_ui_assets_app_skeletonhtml",
+      "configs_cops_ui_assets_app_syncrail",
+      "configs_cops_ui_assets_app_taglabel",
+      "configs_cops_ui_assets_app_updatehead",
+      "configs_cops_ui_assets_app_viewhash",
+      "configs_cops_ui_assets_app_year"
+    ],
+    "5": [
+      "binascii",
+      "scripts_archive_legacy_patches_apply_new_disk_names",
+      "scripts_archive_legacy_patches_apply_russian_names",
+      "scripts_archive_legacy_patches_apply_russian_names_chunked",
+      "scripts_archive_legacy_patches_check_logs",
+      "scripts_archive_legacy_patches_check_logs_ru",
+      "scripts_archive_legacy_patches_install_storage_persistence",
+      "scripts_archive_legacy_patches_patch_capabilities_sharing",
+      "scripts_archive_legacy_patches_patch_dedup",
+      "scripts_archive_legacy_patches_patch_dedup_ru",
+      "scripts_archive_legacy_patches_patch_global_shares",
+      "scripts_archive_legacy_patches_patch_global_shares_ru",
+      "scripts_archive_legacy_patches_patch_remote_dav",
+      "scripts_archive_legacy_patches_patch_remote_dav_ru",
+      "scripts_archive_legacy_patches_setup_clean_storage",
+      "scripts_archive_legacy_patches_setup_native_dav",
+      "scripts_archive_legacy_patches_test_bind_mounts",
+      "scripts_archive_legacy_patches_test_hex_runner",
+      "scripts_archive_legacy_patches_test_samba_russian",
+      "scripts_archive_legacy_patches_update_path_enrichment",
+      "scripts_archive_legacy_patches_update_path_enrichment_ru"
+    ],
+    "6": [
+      "base64",
+      "json",
+      "scripts_archive_legacy_patches_test_b64_utf8",
+      "scripts_archive_legacy_patches_test_fs_path",
+      "scripts_archive_legacy_patches_test_fs_path_ru",
+      "scripts_archive_legacy_patches_test_oc_upload",
+      "scripts_archive_legacy_patches_test_propfind_shares",
+      "scripts_archive_legacy_patches_update_smb_b64",
+      "scripts_archive_legacy_patches_verify_new_names",
+      "scripts_archive_legacy_patches_verify_russian_setup",
+      "ssl",
+      "sys",
+      "urllib_parse",
+      "urllib_request"
+    ],
+    "7": [
+      "configs_cops_theme_make_icon",
+      "configs_cops_theme_make_icon_ico_bytes",
+      "configs_cops_theme_make_icon_main",
+      "configs_cops_theme_make_icon_png_bytes",
+      "configs_cops_theme_make_icon_png_bytes_chunk",
+      "configs_cops_theme_make_icon_poly",
+      "configs_cops_theme_make_icon_poly_inside",
+      "configs_cops_theme_make_icon_rationale_2",
+      "configs_cops_theme_make_icon_render",
+      "configs_cops_theme_make_icon_rounded_rect",
+      "configs_cops_theme_make_icon_rounded_rect_inside",
+      "struct",
+      "zlib"
+    ],
+    "8": [
+      "configs_cops_ui_api",
+      "configs_cops_ui_api_authors_of",
+      "configs_cops_ui_api_closure_1",
+      "configs_cops_ui_api_db",
+      "configs_cops_ui_api_fail",
+      "configs_cops_ui_api_formats_of",
+      "configs_cops_ui_api_row",
+      "configs_cops_ui_api_rows",
+      "configs_cops_ui_api_tags_of"
+    ],
+    "9": [
+      "scripts_tools_healthcheck",
+      "scripts_tools_healthcheck_bad",
+      "scripts_tools_healthcheck_check_code",
+      "scripts_tools_healthcheck_check_code_auth",
+      "scripts_tools_healthcheck_ok",
+      "scripts_tools_healthcheck_say",
+      "scripts_tools_healthcheck_sh__entry"
+    ],
+    "10": [
+      "scripts_archive_legacy_patches_inspect_cloud_php",
+      "scripts_archive_legacy_patches_inspect_cloud_php_telnetclient",
+      "scripts_archive_legacy_patches_inspect_cloud_php_telnetclient_close",
+      "scripts_archive_legacy_patches_inspect_cloud_php_telnetclient_cmd",
+      "scripts_archive_legacy_patches_inspect_cloud_php_telnetclient_init",
+      "scripts_archive_legacy_patches_inspect_cloud_php_telnetclient_read_until"
+    ],
+    "11": [
+      "scripts_archive_legacy_patches_patch_sharing_api",
+      "scripts_archive_legacy_patches_patch_sharing_api_telnetclient",
+      "scripts_archive_legacy_patches_patch_sharing_api_telnetclient_close",
+      "scripts_archive_legacy_patches_patch_sharing_api_telnetclient_cmd",
+      "scripts_archive_legacy_patches_patch_sharing_api_telnetclient_init",
+      "scripts_archive_legacy_patches_patch_sharing_api_telnetclient_read_until"
+    ],
+    "12": [
+      "scripts_archive_legacy_patches_patch_sharing_step2",
+      "scripts_archive_legacy_patches_patch_sharing_step2_telnetclient",
+      "scripts_archive_legacy_patches_patch_sharing_step2_telnetclient_close",
+      "scripts_archive_legacy_patches_patch_sharing_step2_telnetclient_cmd",
+      "scripts_archive_legacy_patches_patch_sharing_step2_telnetclient_init",
+      "scripts_archive_legacy_patches_patch_sharing_step2_telnetclient_read_until"
+    ],
+    "13": [
+      "scripts_archive_legacy_patches_run_sharing_patch",
+      "scripts_archive_legacy_patches_run_sharing_patch_telnetclient",
+      "scripts_archive_legacy_patches_run_sharing_patch_telnetclient_close",
+      "scripts_archive_legacy_patches_run_sharing_patch_telnetclient_cmd",
+      "scripts_archive_legacy_patches_run_sharing_patch_telnetclient_init",
+      "scripts_archive_legacy_patches_run_sharing_patch_telnetclient_read_until"
+    ],
+    "14": [
+      "configs_init_s90syncthing",
+      "configs_init_s90syncthing__entry",
+      "configs_init_s90syncthing_start",
+      "configs_init_s90syncthing_status",
+      "configs_init_s90syncthing_stop"
+    ],
+    "15": [
+      "configs_owncloud_dav_uploads_shim",
+      "configs_owncloud_dav_uploads_shim_closure_1",
+      "configs_owncloud_dav_uploads_shim_shim_dest_path",
+      "configs_owncloud_dav_uploads_shim_shim_rmdir"
+    ],
+    "16": [
+      "concurrent_futures",
+      "scripts_archive_legacy_patches_quick_lan_scan",
+      "scripts_archive_legacy_patches_quick_lan_scan_scan"
+    ],
+    "17": [
+      "configs_cops_bookimport_loop",
+      "configs_cops_bookimport_loop_sh__entry"
+    ],
+    "18": [
+      "configs_init_s89ariang",
+      "configs_init_s89ariang__entry"
+    ],
+    "19": [
+      "configs_init_s89cops",
+      "configs_init_s89cops__entry"
+    ],
+    "20": [
+      "configs_init_s91bookimport",
+      "configs_init_s91bookimport__entry"
+    ],
+    "21": [
+      "scripts_archive_legacy_patches_check_dropbear",
+      "scripts_archive_legacy_patches_check_dropbear_read_until"
+    ],
+    "22": [
+      "scripts_archive_legacy_patches_decode_and_run",
+      "scripts_archive_legacy_patches_decode_and_run_ru"
+    ],
+    "23": [
+      "scripts_tools_backup",
+      "scripts_tools_backup_sh__entry"
+    ],
+    "24": [
+      "scripts_tools_publish_calibre",
+      "scripts_tools_publish_calibre_log"
+    ],
+    "25": [
+      "tls_install_leaf",
+      "tls_install_leaf_sh__entry"
+    ],
+    "26": [
+      "tls_make_cert",
+      "tls_make_cert_sh__entry"
+    ],
+    "27": [
+      "tls_reissue_leaf",
+      "tls_reissue_leaf_sh__entry"
+    ],
+    "28": [
+      "configs_ariang_router"
+    ],
+    "29": [
+      "configs_cops_config_local"
+    ],
+    "30": [
+      "configs_cops_ui_index"
+    ],
+    "31": [
+      "scripts_tools_deploy"
+    ],
+    "32": [
+      "scripts_tools_nasrun"
+    ],
+    "33": [
+      "tls_add_ca_api"
+    ],
+    "34": [
+      "tls_add_ca_serialized"
+    ],
+    "35": [
+      "tls_install_ca_machine"
+    ]
+  },
+  "cohesion": {
+    "0": 0.05,
+    "1": 0.05,
+    "2": 0.13963963963963963,
+    "3": 0.1794871794871795,
+    "4": 0.15666666666666668,
+    "5": 0.09523809523809523,
+    "6": 0.2087912087912088,
+    "7": 0.2692307692307692,
+    "8": 0.3888888888888889,
+    "9": 0.7142857142857143,
+    "10": 0.4666666666666667,
+    "11": 0.4666666666666667,
+    "12": 0.4666666666666667,
+    "13": 0.4666666666666667,
+    "14": 0.7,
+    "15": 0.5,
+    "16": 0.6666666666666666,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0,
+    "34": 1.0,
+    "35": 1.0
+  },
+  "gods": [
+    {
+      "id": "scripts_lib_die",
+      "label": "die()",
+      "degree": 14
+    },
+    {
+      "id": "scripts_lib_log",
+      "label": "log()",
+      "degree": 13
+    },
+    {
+      "id": "scripts_tools_import_books_import_one",
+      "label": "import_one()",
+      "degree": 13
+    },
+    {
+      "id": "scripts_lib_warn",
+      "label": "warn()",
+      "degree": 11
+    },
+    {
+      "id": "configs_cops_ui_assets_app_renderbook",
+      "label": "renderBook()",
+      "degree": 8
+    },
+    {
+      "id": "scripts_06_aria2_ariang_sh__entry",
+      "label": "06-aria2-ariang.sh script",
+      "degree": 8
+    },
+    {
+      "id": "scripts_07_cops_sh__entry",
+      "label": "07-cops.sh script",
+      "degree": 8
+    },
+    {
+      "id": "scripts_lib_load_secrets",
+      "label": "load_secrets()",
+      "degree": 8
+    },
+    {
+      "id": "scripts_tools_import_books_scan",
+      "label": "scan()",
+      "degree": 8
+    },
+    {
+      "id": "configs_cops_ui_assets_app_loadbooks",
+      "label": "loadBooks()",
+      "degree": 7
+    }
+  ],
+  "surprises": [
+    {
+      "source": "01-entware.sh script",
+      "target": "die()",
+      "source_files": [
+        "scripts/01-entware.sh",
+        "scripts/lib.sh"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "01-entware.sh script",
+      "target": "log()",
+      "source_files": [
+        "scripts/01-entware.sh",
+        "scripts/lib.sh"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "01-entware.sh script",
+      "target": "warn()",
+      "source_files": [
+        "scripts/01-entware.sh",
+        "scripts/lib.sh"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "02-packages.sh script",
+      "target": "die()",
+      "source_files": [
+        "scripts/02-packages.sh",
+        "scripts/lib.sh"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "02-packages.sh script",
+      "target": "log()",
+      "source_files": [
+        "scripts/02-packages.sh",
+        "scripts/lib.sh"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

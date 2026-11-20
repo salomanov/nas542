@@ -1,0 +1,873 @@
+{
+  "configs/ariang/router.php": {
+    "mtime": 1792503744.0,
+    "seen": 1795196778.2718582,
+    "ast_hash": "ecf8eba71ebe28f15461eb81b6e961b3",
+    "semantic_hash": "ecf8eba71ebe28f15461eb81b6e961b3"
+  },
+  "configs/cops/bookimport-loop.sh": {
+    "mtime": 1792507174.624206,
+    "seen": 1795196778.2721548,
+    "ast_hash": "91c49998e10b0f8773cc7aa7a7b1e6dd",
+    "semantic_hash": "91c49998e10b0f8773cc7aa7a7b1e6dd"
+  },
+  "configs/cops/config_local.php": {
+    "mtime": 1792510525.3972335,
+    "seen": 1795196778.2723498,
+    "ast_hash": "79df9af605bd8d7f0f2be13be4d28c29",
+    "semantic_hash": "79df9af605bd8d7f0f2be13be4d28c29"
+  },
+  "configs/cops/theme/make_icon.py": {
+    "mtime": 1792506503.5087178,
+    "seen": 1795196778.2725282,
+    "ast_hash": "56a491492374b536ee3e30e57941e3eb",
+    "semantic_hash": "56a491492374b536ee3e30e57941e3eb"
+  },
+  "configs/cops/ui/api.php": {
+    "mtime": 1792508360.5952528,
+    "seen": 1795196778.272707,
+    "ast_hash": "0ef1ffc5b89b057650fe0785fd79d1ac",
+    "semantic_hash": "0ef1ffc5b89b057650fe0785fd79d1ac"
+  },
+  "configs/cops/ui/assets/app.js": {
+    "mtime": 1792508506.5004175,
+    "seen": 1795196778.2728832,
+    "ast_hash": "b5433bdc4b6ae0ca7f96b0ca7b93b398",
+    "semantic_hash": "b5433bdc4b6ae0ca7f96b0ca7b93b398"
+  },
+  "configs/cops/ui/index.php": {
+    "mtime": 1792510537.473653,
+    "seen": 1795196778.2730613,
+    "ast_hash": "7976bf0efb2206bdc6c05a2f1c7b034a",
+    "semantic_hash": "7976bf0efb2206bdc6c05a2f1c7b034a"
+  },
+  "configs/init/S89ariang": {
+    "mtime": 1792503744.0,
+    "seen": 1795196778.2732956,
+    "ast_hash": "058a68afa87a4d2780283066d909f9f5",
+    "semantic_hash": "058a68afa87a4d2780283066d909f9f5"
+  },
+  "configs/init/S89cops": {
+    "mtime": 1792503744.0,
+    "seen": 1795196778.2734993,
+    "ast_hash": "3d8307daac540830a563f1739cd4ac3e",
+    "semantic_hash": "3d8307daac540830a563f1739cd4ac3e"
+  },
+  "configs/init/S90syncthing": {
+    "mtime": 1792503744.0,
+    "seen": 1795196778.2736847,
+    "ast_hash": "a8cd24005e5a7acec5044fcc765cfbd0",
+    "semantic_hash": "a8cd24005e5a7acec5044fcc765cfbd0"
+  },
+  "configs/init/S91bookimport": {
+    "mtime": 1792506941.7745774,
+    "seen": 1795196778.2738712,
+    "ast_hash": "45be009d88e892ea126700f2df5c818c",
+    "semantic_hash": "45be009d88e892ea126700f2df5c818c"
+  },
+  "configs/owncloud/dav-uploads-shim.php": {
+    "mtime": 1794482060.2994564,
+    "seen": 1795196778.2740636,
+    "ast_hash": "87a29bca06f174582985e6baa4547d61",
+    "semantic_hash": "87a29bca06f174582985e6baa4547d61"
+  },
+  "configs/transmission/settings.json": {
+    "mtime": 1792504385.7970026,
+    "seen": 1795196778.274294,
+    "ast_hash": "4e5a7def33987ae12020e455539752f5",
+    "semantic_hash": "4e5a7def33987ae12020e455539752f5",
+    "ast_empty": true
+  },
+  "scripts/01-entware.sh": {
+    "mtime": 1792504149.181723,
+    "seen": 1795196778.2742977,
+    "ast_hash": "41a40f5c57227f429011c172c037b03a",
+    "semantic_hash": "41a40f5c57227f429011c172c037b03a"
+  },
+  "scripts/02-packages.sh": {
+    "mtime": 1792504153.385941,
+    "seen": 1795196778.2745018,
+    "ast_hash": "5fe229fbc6a2f784846b96737ea6710b",
+    "semantic_hash": "5fe229fbc6a2f784846b96737ea6710b"
+  },
+  "scripts/03-syncthing.sh": {
+    "mtime": 1793485554.5254478,
+    "seen": 1795196778.2746842,
+    "ast_hash": "d7d21d169e14497ec81f8ecf6efe4e92",
+    "semantic_hash": "d7d21d169e14497ec81f8ecf6efe4e92"
+  },
+  "scripts/04-filebrowser.sh": {
+    "mtime": 1792504302.551217,
+    "seen": 1795196778.274928,
+    "ast_hash": "b28f336f9c841ef60ef4fd477ae80972",
+    "semantic_hash": "b28f336f9c841ef60ef4fd477ae80972"
+  },
+  "scripts/05-transmission.sh": {
+    "mtime": 1792504323.0077024,
+    "seen": 1795196778.2751672,
+    "ast_hash": "cc3b0d39d6dbd938f6d7625655081931",
+    "semantic_hash": "cc3b0d39d6dbd938f6d7625655081931"
+  },
+  "scripts/06-aria2-ariang.sh": {
+    "mtime": 1792504171.7948399,
+    "seen": 1795196778.2753415,
+    "ast_hash": "98701d6a41231b0876f534f8f6a55af5",
+    "semantic_hash": "98701d6a41231b0876f534f8f6a55af5"
+  },
+  "scripts/07-cops.sh": {
+    "mtime": 1792515837.0792038,
+    "seen": 1795196778.2755086,
+    "ast_hash": "7a4edadae8b4efd5aa9540719b56773f",
+    "semantic_hash": "7a4edadae8b4efd5aa9540719b56773f"
+  },
+  "scripts/08-httpd-proxy.sh": {
+    "mtime": 1792504181.9606106,
+    "seen": 1795196778.2756746,
+    "ast_hash": "2ef648acaee1eb640674ee6f8d8ca2c1",
+    "semantic_hash": "2ef648acaee1eb640674ee6f8d8ca2c1"
+  },
+  "scripts/09-owncloud-shims.sh": {
+    "mtime": 1792504462.5351405,
+    "seen": 1795196778.2760441,
+    "ast_hash": "778fd824efac5bc1a93a5293e77cae50",
+    "semantic_hash": "778fd824efac5bc1a93a5293e77cae50"
+  },
+  "scripts/10-tls.sh": {
+    "mtime": 1792504532.4157088,
+    "seen": 1795196778.2762866,
+    "ast_hash": "b33b5ff550fa21a625fded5740d0d181",
+    "semantic_hash": "b33b5ff550fa21a625fded5740d0d181"
+  },
+  "scripts/archive/legacy_patches/add_keenetic_ports.py": {
+    "mtime": 1792570553.2601986,
+    "seen": 1795196778.2764924,
+    "ast_hash": "f00bfc9d067b2a5ccf74b99a2853ea31",
+    "semantic_hash": "f00bfc9d067b2a5ccf74b99a2853ea31"
+  },
+  "scripts/archive/legacy_patches/add_upnp_dav.py": {
+    "mtime": 1792578776.73078,
+    "seen": 1795196778.2767146,
+    "ast_hash": "ba165443c023236c7d6b99c3e9b046ea",
+    "semantic_hash": "ba165443c023236c7d6b99c3e9b046ea"
+  },
+  "scripts/archive/legacy_patches/append_smb_clean.py": {
+    "mtime": 1792574047.6883264,
+    "seen": 1795196778.2769322,
+    "ast_hash": "3f320415a72b3f0d3983c0cf0ac5eaba",
+    "semantic_hash": "3f320415a72b3f0d3983c0cf0ac5eaba"
+  },
+  "scripts/archive/legacy_patches/apply_new_disk_names.py": {
+    "mtime": 1792913842.9855652,
+    "seen": 1795196778.2771156,
+    "ast_hash": "8601590fe01fbe0095166c14fa64e6f9",
+    "semantic_hash": "8601590fe01fbe0095166c14fa64e6f9"
+  },
+  "scripts/archive/legacy_patches/apply_oc_v10_spoof.py": {
+    "mtime": 1792571724.0730402,
+    "seen": 1795196778.2772894,
+    "ast_hash": "020487c3883e8096e7dbb66c3ad19ddf",
+    "semantic_hash": "020487c3883e8096e7dbb66c3ad19ddf"
+  },
+  "scripts/archive/legacy_patches/apply_russian_names.py": {
+    "mtime": 1792576108.4337964,
+    "seen": 1795196778.2774882,
+    "ast_hash": "3c8b05da54124b9f1aa3aed25641c718",
+    "semantic_hash": "3c8b05da54124b9f1aa3aed25641c718"
+  },
+  "scripts/archive/legacy_patches/apply_russian_names_chunked.py": {
+    "mtime": 1792576168.8808582,
+    "seen": 1795196778.2776906,
+    "ast_hash": "f6619d7a2e068d9acaa1303d1478c9ed",
+    "semantic_hash": "f6619d7a2e068d9acaa1303d1478c9ed"
+  },
+  "scripts/archive/legacy_patches/audit_disk_contents.py": {
+    "mtime": 1792573137.240362,
+    "seen": 1795196778.2778654,
+    "ast_hash": "c6d66b240aca73407d995b5ab2b23f21",
+    "semantic_hash": "c6d66b240aca73407d995b5ab2b23f21"
+  },
+  "scripts/archive/legacy_patches/cat_ocs_cloud.py": {
+    "mtime": 1792571622.8494747,
+    "seen": 1795196778.2780416,
+    "ast_hash": "641748c1fed1e817a0707cab582d19c3",
+    "semantic_hash": "641748c1fed1e817a0707cab582d19c3"
+  },
+  "scripts/archive/legacy_patches/cat_pkg2.py": {
+    "mtime": 1792570905.1057317,
+    "seen": 1795196778.278225,
+    "ast_hash": "d85d5fbcbf325447457dc84af07a976d",
+    "semantic_hash": "d85d5fbcbf325447457dc84af07a976d"
+  },
+  "scripts/archive/legacy_patches/cat_status_php.py": {
+    "mtime": 1792571444.4465125,
+    "seen": 1795196778.2784007,
+    "ast_hash": "4aa58383d1ab0c53d3124cfc4ace6b0a",
+    "semantic_hash": "4aa58383d1ab0c53d3124cfc4ace6b0a"
+  },
+  "scripts/archive/legacy_patches/check_all_state.py": {
+    "mtime": 1792574265.2925377,
+    "seen": 1795196778.2785728,
+    "ast_hash": "3206607f7a8a14b95a6cf8ed2ef52259",
+    "semantic_hash": "3206607f7a8a14b95a6cf8ed2ef52259"
+  },
+  "scripts/archive/legacy_patches/check_apps_and_leftovers.py": {
+    "mtime": 1792574314.3748958,
+    "seen": 1795196778.2787442,
+    "ast_hash": "c64437092a92b16b3e9893f3694da9d4",
+    "semantic_hash": "c64437092a92b16b3e9893f3694da9d4"
+  },
+  "scripts/archive/legacy_patches/check_apps_proxy_file.py": {
+    "mtime": 1792570971.1523638,
+    "seen": 1795196778.2789156,
+    "ast_hash": "ad8f64e665dbc68db542d2dc57824c3e",
+    "semantic_hash": "ad8f64e665dbc68db542d2dc57824c3e"
+  },
+  "scripts/archive/legacy_patches/check_bg_progress.py": {
+    "mtime": 1792573722.2265089,
+    "seen": 1795196778.2790878,
+    "ast_hash": "8873d54507317ada057125cb5111ab69",
+    "semantic_hash": "8873d54507317ada057125cb5111ab69"
+  },
+  "scripts/archive/legacy_patches/check_charset.py": {
+    "mtime": 1792575821.518476,
+    "seen": 1795196778.2792666,
+    "ast_hash": "34ed03672ab11f5f86a60a351b799b74",
+    "semantic_hash": "34ed03672ab11f5f86a60a351b799b74"
+  },
+  "scripts/archive/legacy_patches/check_disks_listing.py": {
+    "mtime": 1792573633.5995474,
+    "seen": 1795196778.2794356,
+    "ast_hash": "7c41a51147f14e92113821167349a928",
+    "semantic_hash": "7c41a51147f14e92113821167349a928"
+  },
+  "scripts/archive/legacy_patches/check_dropbear.py": {
+    "mtime": 1792531030.3301046,
+    "seen": 1795196778.2796042,
+    "ast_hash": "3e21b55be04c67e7af32dc975708b39a",
+    "semantic_hash": "3e21b55be04c67e7af32dc975708b39a"
+  },
+  "scripts/archive/legacy_patches/check_entware_conf.py": {
+    "mtime": 1792570946.764363,
+    "seen": 1795196778.2797785,
+    "ast_hash": "1ee77693737a57ae63187cb5ae4f4774",
+    "semantic_hash": "1ee77693737a57ae63187cb5ae4f4774"
+  },
+  "scripts/archive/legacy_patches/check_logs.py": {
+    "mtime": 1792925102.0833824,
+    "seen": 1795196778.2799418,
+    "ast_hash": "06e546ea648898dedb8eca229201edf0",
+    "semantic_hash": "06e546ea648898dedb8eca229201edf0"
+  },
+  "scripts/archive/legacy_patches/check_move.py": {
+    "mtime": 1792573486.7759905,
+    "seen": 1795196778.2801068,
+    "ast_hash": "8e03ed309ba78202ca51b7ef8804e773",
+    "semantic_hash": "8e03ed309ba78202ca51b7ef8804e773"
+  },
+  "scripts/archive/legacy_patches/check_oc_apps.py": {
+    "mtime": 1792920727.798526,
+    "seen": 1795196778.2802696,
+    "ast_hash": "f1c7c4d4dc363d680cdc39be4b193879",
+    "semantic_hash": "f1c7c4d4dc363d680cdc39be4b193879"
+  },
+  "scripts/archive/legacy_patches/check_oc_db.py": {
+    "mtime": 1792574100.2121217,
+    "seen": 1795196778.2804394,
+    "ast_hash": "0e76bb1ac35f4ca072adacdfcf7f2ad4",
+    "semantic_hash": "0e76bb1ac35f4ca072adacdfcf7f2ad4"
+  },
+  "scripts/archive/legacy_patches/check_oc_files.py": {
+    "mtime": 1792574081.760357,
+    "seen": 1795196778.2806015,
+    "ast_hash": "ff9d707205789b01a17d286027cabdb3",
+    "semantic_hash": "ff9d707205789b01a17d286027cabdb3"
+  },
+  "scripts/archive/legacy_patches/check_ocs_caps.py": {
+    "mtime": 1792571469.1000352,
+    "seen": 1795196778.280766,
+    "ast_hash": "61124556c6f9698c78f1a9a17463a8e6",
+    "semantic_hash": "61124556c6f9698c78f1a9a17463a8e6"
+  },
+  "scripts/archive/legacy_patches/check_pkg_conf.py": {
+    "mtime": 1792570878.5683556,
+    "seen": 1795196778.2809272,
+    "ast_hash": "a3b7014fc759339c7d60c72d5a2905f6",
+    "semantic_hash": "a3b7014fc759339c7d60c72d5a2905f6"
+  },
+  "scripts/archive/legacy_patches/check_real_repr.py": {
+    "mtime": 1792576302.391987,
+    "seen": 1795196778.281088,
+    "ast_hash": "c41523628c960a5406942366020e56ee",
+    "semantic_hash": "c41523628c960a5406942366020e56ee"
+  },
+  "scripts/archive/legacy_patches/check_router.py": {
+    "mtime": 1792569860.2759469,
+    "seen": 1795196778.2812505,
+    "ast_hash": "0461678cf5c1a095709d7b86b061d98d",
+    "semantic_hash": "0461678cf5c1a095709d7b86b061d98d"
+  },
+  "scripts/archive/legacy_patches/check_routes.py": {
+    "mtime": 1792571495.1085095,
+    "seen": 1795196778.281414,
+    "ast_hash": "a4a99116efaef2f7befb049f9da1dd6d",
+    "semantic_hash": "a4a99116efaef2f7befb049f9da1dd6d"
+  },
+  "scripts/archive/legacy_patches/check_running_apps.py": {
+    "mtime": 1792574351.0665555,
+    "seen": 1795196778.2815814,
+    "ast_hash": "4342e14515fb8335c727e07a22c607c5",
+    "semantic_hash": "4342e14515fb8335c727e07a22c607c5"
+  },
+  "scripts/archive/legacy_patches/check_samba_remote.py": {
+    "mtime": 1792867644.844007,
+    "seen": 1795196778.2817428,
+    "ast_hash": "816ede9286bf7c3b974eaf8aab4db734",
+    "semantic_hash": "816ede9286bf7c3b974eaf8aab4db734"
+  },
+  "scripts/archive/legacy_patches/check_script_status.py": {
+    "mtime": 1792573592.3014843,
+    "seen": 1795196778.2819054,
+    "ast_hash": "1bf8ec7ca9dd592020e3793d77ac7cf0",
+    "semantic_hash": "1bf8ec7ca9dd592020e3793d77ac7cf0"
+  },
+  "scripts/archive/legacy_patches/check_sharing_app.py": {
+    "mtime": 1792920811.1405017,
+    "seen": 1795196778.2820678,
+    "ast_hash": "31a1614b5d667137dadfe4dae620d501",
+    "semantic_hash": "31a1614b5d667137dadfe4dae620d501"
+  },
+  "scripts/archive/legacy_patches/check_smb_paths.py": {
+    "mtime": 1792574009.789055,
+    "seen": 1795196778.2822287,
+    "ast_hash": "b7f97d5db16319ccfd9347cbf00e0428",
+    "semantic_hash": "b7f97d5db16319ccfd9347cbf00e0428"
+  },
+  "scripts/archive/legacy_patches/check_upnp.py": {
+    "mtime": 1792569884.105167,
+    "seen": 1795196778.2824128,
+    "ast_hash": "c9a167b44697dcc4403abe1ec2256cf3",
+    "semantic_hash": "c9a167b44697dcc4403abe1ec2256cf3"
+  },
+  "scripts/archive/legacy_patches/check_upnp_nas.py": {
+    "mtime": 1792570329.2500355,
+    "seen": 1795196778.2825804,
+    "ast_hash": "79155ed3f34b0067ad6b6f77be06725e",
+    "semantic_hash": "79155ed3f34b0067ad6b6f77be06725e"
+  },
+  "scripts/archive/legacy_patches/clean_smb_conf.py": {
+    "mtime": 1792867686.1334562,
+    "seen": 1795196778.282742,
+    "ast_hash": "53eabd84aeeaa753141dbb5b0fd423bb",
+    "semantic_hash": "53eabd84aeeaa753141dbb5b0fd423bb"
+  },
+  "scripts/archive/legacy_patches/decode_and_run.py": {
+    "mtime": 1792928845.952469,
+    "seen": 1795196778.282906,
+    "ast_hash": "d4618bbd806a4a51c285793dbbf8bdb1",
+    "semantic_hash": "d4618bbd806a4a51c285793dbbf8bdb1"
+  },
+  "scripts/archive/legacy_patches/deploy_restore_proxy.py": {
+    "mtime": 1792570997.097156,
+    "seen": 1795196778.2830682,
+    "ast_hash": "ddb3b854faf7298bbbc4c8aefcaa56d6",
+    "semantic_hash": "ddb3b854faf7298bbbc4c8aefcaa56d6"
+  },
+  "scripts/archive/legacy_patches/diag_smb.py": {
+    "mtime": 1792860788.440046,
+    "seen": 1795196778.2832322,
+    "ast_hash": "d87e7ff6e1931de16f37a402a43de15e",
+    "semantic_hash": "d87e7ff6e1931de16f37a402a43de15e"
+  },
+  "scripts/archive/legacy_patches/discover_upnp.py": {
+    "mtime": 1792570457.7605777,
+    "seen": 1795196778.2833934,
+    "ast_hash": "f5d1344ede6958c9099dd2b2ec2e99fe",
+    "semantic_hash": "f5d1344ede6958c9099dd2b2ec2e99fe"
+  },
+  "scripts/archive/legacy_patches/find_caps_fn.py": {
+    "mtime": 1792571541.533388,
+    "seen": 1795196778.2835543,
+    "ast_hash": "c1d376c3a427492a102e8a64fca0bba2",
+    "semantic_hash": "c1d376c3a427492a102e8a64fca0bba2"
+  },
+  "scripts/archive/legacy_patches/find_cloud_cls.py": {
+    "mtime": 1792571524.214318,
+    "seen": 1795196778.283722,
+    "ast_hash": "a6d62a92a4c1ca678da90114dd2b6767",
+    "semantic_hash": "a6d62a92a4c1ca678da90114dd2b6767"
+  },
+  "scripts/archive/legacy_patches/find_cloud_ref.py": {
+    "mtime": 1792571567.827989,
+    "seen": 1795196778.2838838,
+    "ast_hash": "80fd987e652625f84b6ce49f660287ef",
+    "semantic_hash": "80fd987e652625f84b6ce49f660287ef"
+  },
+  "scripts/archive/legacy_patches/find_fb_init.py": {
+    "mtime": 1792577955.8728106,
+    "seen": 1795196778.284043,
+    "ast_hash": "853c84de6ab6cd4007e618718adaca37",
+    "semantic_hash": "853c84de6ab6cd4007e618718adaca37"
+  },
+  "scripts/archive/legacy_patches/find_files.py": {
+    "mtime": 1792573507.8513005,
+    "seen": 1795196778.2843788,
+    "ast_hash": "5e000da9f0d4806287a823bf4098fd2c",
+    "semantic_hash": "5e000da9f0d4806287a823bf4098fd2c"
+  },
+  "scripts/archive/legacy_patches/finish_setup.py": {
+    "mtime": 1792574398.7785096,
+    "seen": 1795196778.284591,
+    "ast_hash": "b8a699a77cf74d15bdb26edc7b08b60d",
+    "semantic_hash": "b8a699a77cf74d15bdb26edc7b08b60d"
+  },
+  "scripts/archive/legacy_patches/inspect_after_reboot.py": {
+    "mtime": 1792569790.04205,
+    "seen": 1795196778.2847872,
+    "ast_hash": "dfdf69f4913adde1d78f15501df0629a",
+    "semantic_hash": "dfdf69f4913adde1d78f15501df0629a"
+  },
+  "scripts/archive/legacy_patches/inspect_cloud_php.py": {
+    "mtime": 1792921307.4248555,
+    "seen": 1795196778.2849958,
+    "ast_hash": "e26e1518d29c9a0a9b88233a17bec94b",
+    "semantic_hash": "e26e1518d29c9a0a9b88233a17bec94b"
+  },
+  "scripts/archive/legacy_patches/inspect_dav.py": {
+    "mtime": 1792578417.4757936,
+    "seen": 1795196778.285305,
+    "ast_hash": "af7a751a5cc80f9697729bdb09d6d51d",
+    "semantic_hash": "af7a751a5cc80f9697729bdb09d6d51d"
+  },
+  "scripts/archive/legacy_patches/inspect_dav_auth.py": {
+    "mtime": 1792578569.3984482,
+    "seen": 1795196778.2854764,
+    "ast_hash": "71403c1e77815e9bc6b630bf1183700a",
+    "semantic_hash": "71403c1e77815e9bc6b630bf1183700a"
+  },
+  "scripts/archive/legacy_patches/inspect_dav_conf.py": {
+    "mtime": 1792578444.7393818,
+    "seen": 1795196778.2856443,
+    "ast_hash": "cb7744b9010b55a3ee76ac4cf67edb00",
+    "semantic_hash": "cb7744b9010b55a3ee76ac4cf67edb00"
+  },
+  "scripts/archive/legacy_patches/inspect_dav_gen.py": {
+    "mtime": 1792578549.9821763,
+    "seen": 1795196778.2858393,
+    "ast_hash": "6df133e01f554ffa1db2ea569f7ab28e",
+    "semantic_hash": "6df133e01f554ffa1db2ea569f7ab28e"
+  },
+  "scripts/archive/legacy_patches/inspect_disk_shares.py": {
+    "mtime": 1792572307.7014806,
+    "seen": 1795196778.2860234,
+    "ast_hash": "87d64fe01ba4306cbd590a34b95bff92",
+    "semantic_hash": "87d64fe01ba4306cbd590a34b95bff92"
+  },
+  "scripts/archive/legacy_patches/inspect_disks.py": {
+    "mtime": 1792572280.8632505,
+    "seen": 1795196778.2861872,
+    "ast_hash": "bee58907fd7ca7c86f284cfc6dadd993",
+    "semantic_hash": "bee58907fd7ca7c86f284cfc6dadd993"
+  },
+  "scripts/archive/legacy_patches/inspect_folders_detail.py": {
+    "mtime": 1792573188.8686094,
+    "seen": 1795196778.286351,
+    "ast_hash": "c1ec6f4843bbf4367441ef2d25a8c82c",
+    "semantic_hash": "c1ec6f4843bbf4367441ef2d25a8c82c"
+  },
+  "scripts/archive/legacy_patches/inspect_packages_and_desktop.py": {
+    "mtime": 1792570070.9954782,
+    "seen": 1795196778.286532,
+    "ast_hash": "f87fec2903a74e08809526eff3948e78",
+    "semantic_hash": "f87fec2903a74e08809526eff3948e78"
+  },
+  "scripts/archive/legacy_patches/inspect_shares2.py": {
+    "mtime": 1792572339.2025602,
+    "seen": 1795196778.2868412,
+    "ast_hash": "9e6c082c313a8846b847f13629c41379",
+    "semantic_hash": "9e6c082c313a8846b847f13629c41379"
+  },
+  "scripts/archive/legacy_patches/inspect_sharing.py": {
+    "mtime": 1792920683.7670617,
+    "seen": 1795196778.2870786,
+    "ast_hash": "2d08d555fd5b0d96d1f76d6a367fe700",
+    "semantic_hash": "2d08d555fd5b0d96d1f76d6a367fe700"
+  },
+  "scripts/archive/legacy_patches/inspect_upnp.py": {
+    "mtime": 1792578499.6730585,
+    "seen": 1795196778.2872653,
+    "ast_hash": "66795ae6310b969d1f0ec1b2e6cd3011",
+    "semantic_hash": "66795ae6310b969d1f0ec1b2e6cd3011"
+  },
+  "scripts/archive/legacy_patches/install_storage_persistence.py": {
+    "mtime": 1792578852.1521442,
+    "seen": 1795196778.2874486,
+    "ast_hash": "180e69eea925a8fc95672179e855613b",
+    "semantic_hash": "180e69eea925a8fc95672179e855613b"
+  },
+  "scripts/archive/legacy_patches/ls_oc.py": {
+    "mtime": 1792571598.4404776,
+    "seen": 1795196778.287628,
+    "ast_hash": "078a00c4d8655e435df80d208d76e094",
+    "semantic_hash": "078a00c4d8655e435df80d208d76e094"
+  },
+  "scripts/archive/legacy_patches/patch_capabilities_sharing.py": {
+    "mtime": 1792920918.4931498,
+    "seen": 1795196778.2878027,
+    "ast_hash": "1ec93209459e3a97a9599cb71729b5a1",
+    "semantic_hash": "1ec93209459e3a97a9599cb71729b5a1"
+  },
+  "scripts/archive/legacy_patches/patch_cloud_php.py": {
+    "mtime": 1792571756.1689434,
+    "seen": 1795196778.2880552,
+    "ast_hash": "ec883f5c02451bddffa6f3dab1790a09",
+    "semantic_hash": "ec883f5c02451bddffa6f3dab1790a09"
+  },
+  "scripts/archive/legacy_patches/patch_dedup.py": {
+    "mtime": 1792927997.5213213,
+    "seen": 1795196778.2883124,
+    "ast_hash": "c15e5e71a43e068fcf11f940510584b2",
+    "semantic_hash": "c15e5e71a43e068fcf11f940510584b2"
+  },
+  "scripts/archive/legacy_patches/patch_global_shares.py": {
+    "mtime": 1792927951.8631835,
+    "seen": 1795196778.288503,
+    "ast_hash": "eea8c8b55eb214c70fce7c69c9b2b94c",
+    "semantic_hash": "eea8c8b55eb214c70fce7c69c9b2b94c"
+  },
+  "scripts/archive/legacy_patches/patch_remote_dav.py": {
+    "mtime": 1792928822.0622716,
+    "seen": 1795196778.2886658,
+    "ast_hash": "1f236830d937ea52bc5e5f2aa33e3c38",
+    "semantic_hash": "1f236830d937ea52bc5e5f2aa33e3c38"
+  },
+  "scripts/archive/legacy_patches/patch_sharing_api.py": {
+    "mtime": 1792923188.98055,
+    "seen": 1795196778.2888684,
+    "ast_hash": "d40a77ebbfbdec591fc2a13aaf649932",
+    "semantic_hash": "d40a77ebbfbdec591fc2a13aaf649932"
+  },
+  "scripts/archive/legacy_patches/patch_sharing_step2.py": {
+    "mtime": 1792924606.607718,
+    "seen": 1795196778.289033,
+    "ast_hash": "f80f500589b3fce2b695aa3bd1d5303b",
+    "semantic_hash": "f80f500589b3fce2b695aa3bd1d5303b"
+  },
+  "scripts/archive/legacy_patches/patch_upnp.py": {
+    "mtime": 1792578811.7551394,
+    "seen": 1795196778.2891958,
+    "ast_hash": "9aaf46706e5af74f7ba578631c64bbb2",
+    "semantic_hash": "9aaf46706e5af74f7ba578631c64bbb2"
+  },
+  "scripts/archive/legacy_patches/query_keenetic_upnp.py": {
+    "mtime": 1792570485.8380759,
+    "seen": 1795196778.289358,
+    "ast_hash": "8fdeba05a56b9f711ab1e09d1a538b26",
+    "semantic_hash": "8fdeba05a56b9f711ab1e09d1a538b26"
+  },
+  "scripts/archive/legacy_patches/query_keenetic_upnp2.py": {
+    "mtime": 1792570513.2148747,
+    "seen": 1795196778.2895458,
+    "ast_hash": "0afa78be29e3af6eb0a5d772fe4bf7d0",
+    "semantic_hash": "0afa78be29e3af6eb0a5d772fe4bf7d0"
+  },
+  "scripts/archive/legacy_patches/quick_lan_scan.py": {
+    "mtime": 1792861153.8599238,
+    "seen": 1795196778.2897072,
+    "ast_hash": "e3caffcc67e629bc28061f2712be9aae",
+    "semantic_hash": "e3caffcc67e629bc28061f2712be9aae"
+  },
+  "scripts/archive/legacy_patches/remove_old_disks.py": {
+    "mtime": 1792578936.5473845,
+    "seen": 1795196778.2898684,
+    "ast_hash": "bd4908c36f0e8e9beb7036e2fa2dd5c4",
+    "semantic_hash": "bd4908c36f0e8e9beb7036e2fa2dd5c4"
+  },
+  "scripts/archive/legacy_patches/run_bg_move.py": {
+    "mtime": 1792573682.4713387,
+    "seen": 1795196778.2900553,
+    "ast_hash": "02715fd99215697af3bffb676db82146",
+    "semantic_hash": "02715fd99215697af3bffb676db82146"
+  },
+  "scripts/archive/legacy_patches/run_sharing_patch.py": {
+    "mtime": 1792921361.473429,
+    "seen": 1795196778.290241,
+    "ast_hash": "686d91a58994cfc39356d36e343614d2",
+    "semantic_hash": "686d91a58994cfc39356d36e343614d2"
+  },
+  "scripts/archive/legacy_patches/setup_clean_storage.py": {
+    "mtime": 1792577983.8755615,
+    "seen": 1795196778.2904031,
+    "ast_hash": "47583b22ca37de4ec3507bc27e88fe60",
+    "semantic_hash": "47583b22ca37de4ec3507bc27e88fe60"
+  },
+  "scripts/archive/legacy_patches/setup_clean_structure.py": {
+    "mtime": 1792573550.849327,
+    "seen": 1795196778.2905643,
+    "ast_hash": "89b32882cac25b2a28ea4bf790ead7f2",
+    "semantic_hash": "89b32882cac25b2a28ea4bf790ead7f2"
+  },
+  "scripts/archive/legacy_patches/setup_native_dav.py": {
+    "mtime": 1792578597.0224998,
+    "seen": 1795196778.2907245,
+    "ast_hash": "2acf74234d15c5723e82fe3119c063e1",
+    "semantic_hash": "2acf74234d15c5723e82fe3119c063e1"
+  },
+  "scripts/archive/legacy_patches/setup_samba_shares.py": {
+    "mtime": 1792573924.3397002,
+    "seen": 1795196778.2908845,
+    "ast_hash": "c36b629de8ac81a46cd75224738848fe",
+    "semantic_hash": "c36b629de8ac81a46cd75224738848fe"
+  },
+  "scripts/archive/legacy_patches/setup_upnp_daemon.py": {
+    "mtime": 1792570610.2200582,
+    "seen": 1795196778.2911122,
+    "ast_hash": "d8d496383c800306e5fe009f5d1e31d4",
+    "semantic_hash": "d8d496383c800306e5fe009f5d1e31d4"
+  },
+  "scripts/archive/legacy_patches/start_bg_subshell.py": {
+    "mtime": 1792573746.5073204,
+    "seen": 1795196778.2914577,
+    "ast_hash": "288141aa4b9b5f1d4eaecf3546c3f94b",
+    "semantic_hash": "288141aa4b9b5f1d4eaecf3546c3f94b"
+  },
+  "scripts/archive/legacy_patches/start_dropbear.py": {
+    "mtime": 1792531064.8255255,
+    "seen": 1795196778.2917202,
+    "ast_hash": "6ba2b4e6e9eed9222c5fbe009678013a",
+    "semantic_hash": "6ba2b4e6e9eed9222c5fbe009678013a"
+  },
+  "scripts/archive/legacy_patches/step1_organize_files.py": {
+    "mtime": 1792573452.6429946,
+    "seen": 1795196778.2918828,
+    "ast_hash": "f1714979f2a2557acd2a252339e08d12",
+    "semantic_hash": "f1714979f2a2557acd2a252339e08d12"
+  },
+  "scripts/archive/legacy_patches/test_b64_utf8.py": {
+    "mtime": 1792575957.894224,
+    "seen": 1795196778.292048,
+    "ast_hash": "d4a76c51fa548906654e9002fbe003bf",
+    "semantic_hash": "d4a76c51fa548906654e9002fbe003bf"
+  },
+  "scripts/archive/legacy_patches/test_bind_mounts.py": {
+    "mtime": 1792578731.6867018,
+    "seen": 1795196778.292223,
+    "ast_hash": "fb1e7efc3518fff9090b47ff6ec3f4d2",
+    "semantic_hash": "fb1e7efc3518fff9090b47ff6ec3f4d2"
+  },
+  "scripts/archive/legacy_patches/test_fb_symlink.py": {
+    "mtime": 1792573238.8770118,
+    "seen": 1795196778.2923932,
+    "ast_hash": "2b7d373ac5fa16c3560bc55c0c7a7a95",
+    "semantic_hash": "2b7d373ac5fa16c3560bc55c0c7a7a95"
+  },
+  "scripts/archive/legacy_patches/test_fs_path.py": {
+    "mtime": 1792928791.1918054,
+    "seen": 1795196778.2925625,
+    "ast_hash": "0b80cfbfc2754c022d1cbb67cf38d8f1",
+    "semantic_hash": "0b80cfbfc2754c022d1cbb67cf38d8f1"
+  },
+  "scripts/archive/legacy_patches/test_hex_runner.py": {
+    "mtime": 1792576022.1255546,
+    "seen": 1795196778.2927306,
+    "ast_hash": "e61b475031dd12d8023fd015b3b62856",
+    "semantic_hash": "e61b475031dd12d8023fd015b3b62856"
+  },
+  "scripts/archive/legacy_patches/test_lan_conn.py": {
+    "mtime": 1792860953.1501684,
+    "seen": 1795196778.2928998,
+    "ast_hash": "b8e0ab7b268fe392bd38ac4aa28f34a3",
+    "semantic_hash": "b8e0ab7b268fe392bd38ac4aa28f34a3"
+  },
+  "scripts/archive/legacy_patches/test_nas_lan.py": {
+    "mtime": 1792569908.1116872,
+    "seen": 1795196778.2930715,
+    "ast_hash": "84436eccc6ba40e5e792763d814e1fd4",
+    "semantic_hash": "84436eccc6ba40e5e792763d814e1fd4"
+  },
+  "scripts/archive/legacy_patches/test_native_dav_propfind.py": {
+    "mtime": 1792578653.935979,
+    "seen": 1795196778.2932422,
+    "ast_hash": "da9097d6a7a0a7e4dcc6c8d74087a1bd",
+    "semantic_hash": "da9097d6a7a0a7e4dcc6c8d74087a1bd"
+  },
+  "scripts/archive/legacy_patches/test_oc_and_downloads.py": {
+    "mtime": 1792574370.3669777,
+    "seen": 1795196778.2934031,
+    "ast_hash": "0f487abab075f97fc0521aaf6917b446",
+    "semantic_hash": "0f487abab075f97fc0521aaf6917b446"
+  },
+  "scripts/archive/legacy_patches/test_oc_scan.py": {
+    "mtime": 1792574146.5516644,
+    "seen": 1795196778.2935636,
+    "ast_hash": "322c8dc2731c755c67c630194600b629",
+    "semantic_hash": "322c8dc2731c755c67c630194600b629"
+  },
+  "scripts/archive/legacy_patches/test_oc_upload.py": {
+    "mtime": 1792920856.8376596,
+    "seen": 1795196778.293723,
+    "ast_hash": "9ca4a622099f0c49412ce18a118547a9",
+    "semantic_hash": "9ca4a622099f0c49412ce18a118547a9"
+  },
+  "scripts/archive/legacy_patches/test_propfind_shares.py": {
+    "mtime": 1792928911.7135944,
+    "seen": 1795196778.2938826,
+    "ast_hash": "9b8e4f5bd4b5e9bb10499671e313b7cc",
+    "semantic_hash": "9b8e4f5bd4b5e9bb10499671e313b7cc"
+  },
+  "scripts/archive/legacy_patches/test_root_urls.py": {
+    "mtime": 1792570156.038243,
+    "seen": 1795196778.2940443,
+    "ast_hash": "1f30028a04a3321fe8e7308fdbda7725",
+    "semantic_hash": "1f30028a04a3321fe8e7308fdbda7725"
+  },
+  "scripts/archive/legacy_patches/test_samba_russian.py": {
+    "mtime": 1792576049.9295652,
+    "seen": 1795196778.2942033,
+    "ast_hash": "0d6f1ae370468e8c42be4a0742756879",
+    "semantic_hash": "0d6f1ae370468e8c42be4a0742756879"
+  },
+  "scripts/archive/legacy_patches/test_samba_utf8.py": {
+    "mtime": 1792575885.9937005,
+    "seen": 1795196778.294363,
+    "ast_hash": "c46666fb01d8e54fa453f6a415e86ee9",
+    "semantic_hash": "c46666fb01d8e54fa453f6a415e86ee9"
+  },
+  "scripts/archive/legacy_patches/test_utf8.py": {
+    "mtime": 1792575848.358407,
+    "seen": 1795196778.294522,
+    "ast_hash": "3f71f6498cfab8ed509f1c95b505099f",
+    "semantic_hash": "3f71f6498cfab8ed509f1c95b505099f"
+  },
+  "scripts/archive/legacy_patches/test_web_local.py": {
+    "mtime": 1792569813.9959705,
+    "seen": 1795196778.2946832,
+    "ast_hash": "d06c3c0c7150dec169384b4182a35301",
+    "semantic_hash": "d06c3c0c7150dec169384b4182a35301"
+  },
+  "scripts/archive/legacy_patches/update_path_enrichment.py": {
+    "mtime": 1792927519.8271582,
+    "seen": 1795196778.2948425,
+    "ast_hash": "db5b002044b0f765c6f4019c0414ff80",
+    "semantic_hash": "db5b002044b0f765c6f4019c0414ff80"
+  },
+  "scripts/archive/legacy_patches/update_smb_b64.py": {
+    "mtime": 1792573979.9769702,
+    "seen": 1795196778.295005,
+    "ast_hash": "e6a6e4ef7fec4ac88e3dce67cde88de2",
+    "semantic_hash": "e6a6e4ef7fec4ac88e3dce67cde88de2"
+  },
+  "scripts/archive/legacy_patches/update_smb_py.py": {
+    "mtime": 1792573954.4112084,
+    "seen": 1795196778.2951665,
+    "ast_hash": "405d67e877ce0e164d8cfc80ee5279f8",
+    "semantic_hash": "405d67e877ce0e164d8cfc80ee5279f8"
+  },
+  "scripts/archive/legacy_patches/verify_final.py": {
+    "mtime": 1792574420.8265698,
+    "seen": 1795196778.295327,
+    "ast_hash": "11725160084f35c1b53a969f41934c25",
+    "semantic_hash": "11725160084f35c1b53a969f41934c25"
+  },
+  "scripts/archive/legacy_patches/verify_new_names.py": {
+    "mtime": 1792913888.7494943,
+    "seen": 1795196778.2954865,
+    "ast_hash": "c7eb5be207a25bb268b2f5dbe929e619",
+    "semantic_hash": "c7eb5be207a25bb268b2f5dbe929e619"
+  },
+  "scripts/archive/legacy_patches/verify_russian_setup.py": {
+    "mtime": 1792576274.415166,
+    "seen": 1795196778.2956486,
+    "ast_hash": "22c428a40f77cced57c5f829793955c9",
+    "semantic_hash": "22c428a40f77cced57c5f829793955c9"
+  },
+  "scripts/install-all.sh": {
+    "mtime": 1793485579.272396,
+    "seen": 1795196778.2958095,
+    "ast_hash": "bd056fd812ae181ef27235492242aa02",
+    "semantic_hash": "bd056fd812ae181ef27235492242aa02"
+  },
+  "scripts/lib.sh": {
+    "mtime": 1792515826.5030448,
+    "seen": 1795196778.2959683,
+    "ast_hash": "95069115e7f93fc162efa178008c1499",
+    "semantic_hash": "95069115e7f93fc162efa178008c1499"
+  },
+  "scripts/tools/backup.sh": {
+    "mtime": 1792504207.4176095,
+    "seen": 1795196778.2961247,
+    "ast_hash": "a6f0330c8c4080597f38aa6b0c8a69c1",
+    "semantic_hash": "a6f0330c8c4080597f38aa6b0c8a69c1"
+  },
+  "scripts/tools/deploy.ps1": {
+    "mtime": 1792504391.7020378,
+    "seen": 1795196778.296284,
+    "ast_hash": "6d1eb01c3caeaf37e51b38513dee866a",
+    "semantic_hash": "6d1eb01c3caeaf37e51b38513dee866a"
+  },
+  "scripts/tools/healthcheck.sh": {
+    "mtime": 1793485853.8625443,
+    "seen": 1795196778.296441,
+    "ast_hash": "85f7945f6e82e160652778d65c8095ae",
+    "semantic_hash": "85f7945f6e82e160652778d65c8095ae"
+  },
+  "scripts/tools/import_books.py": {
+    "mtime": 1792507171.4378266,
+    "seen": 1795196778.2966006,
+    "ast_hash": "f7fb4b0bb9290fe92cf9e5131a03adf1",
+    "semantic_hash": "f7fb4b0bb9290fe92cf9e5131a03adf1"
+  },
+  "scripts/tools/mklib.py": {
+    "mtime": 1792499917.2727795,
+    "seen": 1795196778.296759,
+    "ast_hash": "d8c72ea44750a25b9cd4e9026c02fada",
+    "semantic_hash": "d8c72ea44750a25b9cd4e9026c02fada"
+  },
+  "scripts/tools/nasrun.ps1": {
+    "mtime": 1792504391.703547,
+    "seen": 1795196778.296917,
+    "ast_hash": "9ead26a48cd2bc3136dc65b30d17d5d6",
+    "semantic_hash": "9ead26a48cd2bc3136dc65b30d17d5d6"
+  },
+  "scripts/tools/publish-calibre.ps1": {
+    "mtime": 1792516033.7913742,
+    "seen": 1795196778.2970793,
+    "ast_hash": "90708942a4fca5cde7a3c7b9bb2a01b9",
+    "semantic_hash": "90708942a4fca5cde7a3c7b9bb2a01b9"
+  },
+  "tls/add-ca-api.ps1": {
+    "mtime": 1792504391.7045429,
+    "seen": 1795196778.297239,
+    "ast_hash": "257c68a188d7104e2717c3d8a08cc5f5",
+    "semantic_hash": "257c68a188d7104e2717c3d8a08cc5f5"
+  },
+  "tls/add-ca-serialized.ps1": {
+    "mtime": 1792504391.7055423,
+    "seen": 1795196778.2973964,
+    "ast_hash": "e00665a831d8585f0744b656cec0a51b",
+    "semantic_hash": "e00665a831d8585f0744b656cec0a51b"
+  },
+  "tls/install-ca-machine.ps1": {
+    "mtime": 1792504391.7055423,
+    "seen": 1795196778.297554,
+    "ast_hash": "b998ab20689ede5ab42f63d24817d230",
+    "semantic_hash": "b998ab20689ede5ab42f63d24817d230"
+  },
+  "tls/install-leaf.sh": {
+    "mtime": 1792486623.0177743,
+    "seen": 1795196778.297829,
+    "ast_hash": "88d9e2233c69bacacf1fd33e6ce7e7f5",
+    "semantic_hash": "88d9e2233c69bacacf1fd33e6ce7e7f5"
+  },
+  "tls/make-cert.sh": {
+    "mtime": 1792486528.052133,
+    "seen": 1795196778.297993,
+    "ast_hash": "d71de03dc3328e88c33c34ec0d5a6b69",
+    "semantic_hash": "d71de03dc3328e88c33c34ec0d5a6b69"
+  },
+  "tls/reissue-leaf.sh": {
+    "mtime": 1792486601.8634791,
+    "seen": 1795196778.2981749,
+    "ast_hash": "5c4f849e4d810eb97a3f08d9571af6a0",
+    "semantic_hash": "5c4f849e4d810eb97a3f08d9571af6a0"
+  }
+}
